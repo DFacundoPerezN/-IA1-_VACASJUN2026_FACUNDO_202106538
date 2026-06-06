@@ -1,3 +1,7 @@
+# py -3.10 -m venv venv
+# .\venv\Scripts\Activate.ps1
+# pip install fastapi uvicorn pyswip
+# uvicorn main:app --reload
 from fastapi import FastAPI
 from repositories.prolog_repo import PrologRepo
 from controllers.city_controller import cities_router
