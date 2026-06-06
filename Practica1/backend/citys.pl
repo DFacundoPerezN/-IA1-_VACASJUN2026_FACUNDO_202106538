@@ -38,3 +38,21 @@ distancia(Ciudad1, Ciudad2, Distancia):- ruta(Ciudad2, Ciudad1, Distancia).
 get_ciudades(Lista):- findall(Ciudad, ciudad(Ciudad), Lista).
 
 % regla para encontrar una ruta directa entre dos ciudades
+
+recorrido/4.
+
+% Inicializa la lista de Visitadas con la ciudad de Origen.
+recorrido(Origen, Destino, ListaCiudades, Distancia) :-
+    recorrido_aux(Origen, Destino, [Origen], ListaCiudades, Distancia).
+
+% Base: Una ruta directa entre el Origen y el Destino.
+recorrido_aux(Origen, Destino, Visitadas, ListaCiudades, Distancia) :-
+    distancia(Origen, Destino, Distancia),
+
+    % Construr lista final append al destino
+    append(Visitadas, [Destino], ListaCiudades)
+    % ,write('Ruta encontrada: '), write(ListaCiudades), write(' con distancia: '), write(Distancia), nl
+    .
+
+
+% consult('citys.pl')
