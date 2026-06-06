@@ -26,10 +26,37 @@ response:
 request:
 
 ````json
-
+{
+    "city": "spares"
+}
 ```
 response:
 
 ````json
+{
+  "success": true,
+  "message": "La ciudad 'spares' fue agregada exitosamente.",
+  "code": 201
+}
+```
 
+## 3. POST Guardar ruta /ciudades/ruta
+
+request:
+
+````json
+{
+  "city1": "spares",
+  "city2": "francfort_del_meno",
+  "distance": 50
+}
+```
+response:
+
+````json
+{
+  "success": true,
+  "message": "La ciudad 'spares' fue agregada exitosamente.",
+  "code": 201
+}
 ```

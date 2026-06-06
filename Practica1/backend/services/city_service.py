@@ -10,3 +10,7 @@ class CityService:
     
     def add_city(self, city_name: str) -> dict:
         return self.city_repository.agregar_ciudad(city_name.lower())
+    
+    def add_route(self, city1: str, city2: str, distance: int) -> dict:
+        return self.city_repository.agregar_ruta(city1.lower(), city2.lower(), distance)
+    
