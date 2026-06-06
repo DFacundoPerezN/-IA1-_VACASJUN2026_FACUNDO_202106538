@@ -1,0 +1,36 @@
+Bérlin
+Hamburgo
+Múnich
+Colonia
+Fráncfort del Meno
+Stuttgart
+Düsseldorf
+Dortmund
+Leipzig
+Essen
+Bremen
+Núremberg
+
+(Extras:
+Dresde
+Hannover
+)
+
+Hamburgo-Berlín 289 km
+Hamburgo-Bremen 125 km
+Berlín-Leipzig 194 km
+Leipzig-Núremberg 292 km
+Núremberg-Múnich 169 km
+Munich-Stuttgart 231 km
+Stuttgart-Fráncfort del Meno 203 km
+Colonia-Fráncfort del Meno 172 km
+Düsseldorf-Colonia 40 km
+Colonia-Dormut 94 km
+Essen-Düsseldorf 37 km
+Essen-Dormut 36 km
+Dortmund-Bremen 235 km
+
+Extras
+(Hamburgo-Hannover 150 km
+Munich-Núremberg 169 km
+#Leipzig-Múnich 430 km (puede excluirseS))
