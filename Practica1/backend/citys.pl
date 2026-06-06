@@ -1,6 +1,9 @@
 % Hechos
 % datos ciudades
 
+:- multifile ciudad/1.
+:- multifile ruta/3.
+
 ciudad(berlin).
 ciudad(hamburgo).
 ciudad(munich).

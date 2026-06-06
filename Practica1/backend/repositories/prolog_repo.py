@@ -6,12 +6,19 @@ from typing import List
 class PrologRepo:
     def __init__(self, prolog_file):
         self.prolog_file = Path(prolog_file).resolve()
+        self.aux_file = Path("c_aux.pl").resolve()
         self.prolog = Prolog()
         self._consult_file()
 
     def _consult_file(self):
         path_str = self.prolog_file.as_posix()
+        list(self.prolog.query(f"unload_file('{path_str}')")) # Asegura la recarga del disco
         list(self.prolog.query(f"consult('{path_str}')"))
+
+        if self.aux_file.exists():
+            aux_str = self.aux_file.as_posix()
+            list(self.prolog.query(f"unload_file('{aux_str}')")) # Asegura la recarga del disco
+            list(self.prolog.query(f"consult('{aux_str}')"))
 
     def query_one(self, query_str: str):
         return next(self.prolog.query(query_str), None)
@@ -30,14 +37,45 @@ class PrologRepo:
         
         s_escaped = s.replace("'", "''") # Juan -> 'Juan'
         return f"'{s_escaped}'"
-    
-    def obtener_ciudad(self, nombre_ciudad):
-        nombre_ciudad_atom = self._to_prolog_atom(nombre_ciudad)
-        query_str = f"ciudad({nombre_ciudad_atom}, Poblacion, Pais)"
-        return self.query_one(query_str)
-    
+
+    def existe_ciudad(self, ciudad:str) -> bool:
+        ciudad_atom = self._to_prolog_atom(ciudad)
+        query_str = f"ciudad({ciudad_atom})"
+        return bool(self.query_one(query_str))
+
     def get_ciudades(self) -> List[str]:
         sol = self.query_one("get_ciudades(Lista)")
         if not sol:
             return []
         return [str(ciudad) for ciudad in sol['Lista']]
+    
+    # POST
+    def agregar_ciudad(self, ciudad:str) -> bool:       
+        
+        if self.existe_ciudad(ciudad):
+            print(f"La ciudad '{ciudad}' ya existe.")
+            return {
+                "success": False,
+                "message": f"La ciudad '{ciudad}' ya existe.",
+                "code": 400
+            }
+
+        ciudad_atom = self._to_prolog_atom(ciudad)
+        try:
+            # Agregar la nueva ciudad al archivo auxiliar, el otro es prolog_file
+            with self.aux_file.open('a') as f:
+                f.write(f"ciudad({ciudad_atom}).\n")
+
+            self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ciudad
+            return {
+                "success": True,
+                "message": f"La ciudad '{ciudad}' fue agregada exitosamente.",
+                "code": 201
+            }
+        except Exception as e:
+            print(f"Error al agregar ciudad: {e}")
+            return {
+                "success": False,
+                "message": f"Error al agregar ciudad '{ciudad}': {e}",
+                "code": 500
+            }
