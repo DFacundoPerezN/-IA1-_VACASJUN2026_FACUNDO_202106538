@@ -73,4 +73,26 @@ recorrido_aux(Origen, Destino, Visitadas, ListaCiudades, Distancia) :-
 
 % recorrido(essen, dortmund, ListaCiudades, Distancia)
 
+% Ruta mas corta, ósea la mejor
+mejor_ruta(Origen, Destino, MejorCamino, MenorDistancia) :-
+    % Encontrar Todas las combinaciones de caminos y distancias
+    % Guardamos parejas del formato: r(Distancia, Camino)
+    findall(r(Dist, Camino), recorrido(Origen, Destino, Camino, Dist), TodasLasRutas),
+    
+    % Seleccionar la que tiene la menor distancia
+    obtener_minima(TodasLasRutas, r(MenorDistancia, MejorCamino)).
+
+
+% Si solo hay una ruta se usa ! para que no busque mas rutas 
+obtener_minima([Ruta], Ruta) :- !.
+
+% Comparar la primera ruta con la menor del resto de la lista
+obtener_minima([r(D1, C1) | Resto], r(MinD, MinC)) :-
+    obtener_minima(Resto, r(D2, C2)),
+    (D1 < D2 -> 
+        MinD = D1, MinC = C1 
+    ; 
+        MinD = D2, MinC = C2
+    ).
+
 % consult('citys.pl')
