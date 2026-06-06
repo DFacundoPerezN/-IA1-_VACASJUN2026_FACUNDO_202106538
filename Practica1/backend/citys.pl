@@ -54,5 +54,23 @@ recorrido_aux(Origen, Destino, Visitadas, ListaCiudades, Distancia) :-
     % ,write('Ruta encontrada: '), write(ListaCiudades), write(' con distancia: '), write(Distancia), nl
     .
 
+% Recursion: No hay ruta directa, buscamos una ciudad intermedia (Siguiente).
+recorrido_aux(Origen, Destino, Visitadas, ListaCiudades, Distancia) :-
+    distancia(Origen, Siguiente, D1),
+
+    % Evitamos ciclos al confirmar que Siguiente no haya sido visitada antes
+    \+ member(Siguiente, Visitadas),
+    % Evitamos pasar dos veces por el Destino
+    \+ member(Destino, Visitadas),
+
+    % Añadimos la ciudad intermedia a los Visitadas
+    append(Visitadas, [Siguiente], NuevosVisitadas),
+
+    % Buscamos el resto del camino desde 'Siguiente' hasta el 'Destino'
+    recorrido_aux(Siguiente, Destino, NuevosVisitadas, ListaCiudades, D2),
+    % Sumar distancias
+    Distancia is D1 + D2.
+
+% recorrido(essen, dortmund, ListaCiudades, Distancia)
 
 % consult('citys.pl')
