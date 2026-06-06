@@ -41,7 +41,9 @@ class PrologRepo:
     def existe_ciudad(self, ciudad:str) -> bool:
         ciudad_atom = self._to_prolog_atom(ciudad)
         query_str = f"ciudad({ciudad_atom})"
-        return bool(self.query_one(query_str))
+        sol = self.query_one(query_str)
+        print(f"Verificando: {query_str} -> {sol}")
+        return self.query_one(query_str)=={}
 
     def get_ciudades(self) -> List[str]:
         sol = self.query_one("get_ciudades(Lista)")
@@ -77,5 +79,42 @@ class PrologRepo:
             return {
                 "success": False,
                 "message": f"Error al agregar ciudad '{ciudad}': {e}",
+                "code": 500
+            }
+        
+    # POST agregar ruta
+    def agregar_ruta(self, ciudad1:str, ciudad2:str, distancia:int) -> bool:
+        if not self.existe_ciudad(ciudad1):
+            return {
+                "success": False,
+                "message": f"'{ciudad1}' no existe.",
+                "code": 400
+            }
+        if not self.existe_ciudad(ciudad2):
+            return {
+                "success": False,
+                "message": f"'{ciudad2}' no existe.",
+                "code": 400
+            }
+        
+        ciudad1_atom = self._to_prolog_atom(ciudad1)
+        ciudad2_atom = self._to_prolog_atom(ciudad2)
+
+        try:
+            with self.aux_file.open('a') as f:
+                f.write(f"ruta({ciudad1_atom}, {ciudad2_atom}, {distancia}).\n")
+                #f.write(f"ruta({ciudad2_atom}, {ciudad1_atom}, {distancia}).\n") # Ruta bidireccional
+            self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ruta
+            return {
+                "success": True,
+                "message": f"La ruta entre '{ciudad1}' y '{ciudad2}' fue agregada exitosamente.",
+                "distance": distancia,
+                "code": 201
+            }
+        except Exception as e:
+            print(f"Error al agregar ruta: {e}")
+            return {
+                "success": False,
+                "message": f"Error al agregar ruta entre '{ciudad1}' y '{ciudad2}': {e}",
                 "code": 500
             }
