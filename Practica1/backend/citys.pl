@@ -29,3 +29,12 @@ ruta(dortmund, colonia, 94).
 ruta(essen, dusseldorf, 37).
 ruta(essen, dortmund, 36).
 ruta(dortmund, bremen, 235).
+
+% reglas
+
+distancia(Ciudad1, Ciudad2, Distancia):- ruta(Ciudad1, Ciudad2, Distancia).
+distancia(Ciudad1, Ciudad2, Distancia):- ruta(Ciudad2, Ciudad1, Distancia).
+
+get_ciudades(Lista):- findall(Ciudad, ciudad(Ciudad), Lista).
+
+% regla para encontrar una ruta directa entre dos ciudades
