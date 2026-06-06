@@ -42,7 +42,7 @@ class PrologRepo:
         ciudad_atom = self._to_prolog_atom(ciudad)
         query_str = f"ciudad({ciudad_atom})"
         sol = self.query_one(query_str)
-        print(f"Verificando: {query_str} -> {sol}")
+        #print(f"Verificando: {query_str} -> {sol}")
         return self.query_one(query_str)=={}
 
     def get_ciudades(self) -> List[str]:

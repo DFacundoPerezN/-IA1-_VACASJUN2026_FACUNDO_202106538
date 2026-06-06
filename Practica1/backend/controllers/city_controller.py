@@ -26,5 +26,33 @@ def cities_router(service: CityService) -> APIRouter:
                 "code": 400
             }
         return service.add_city(city)
+    
+    @router.post("/ruta", summary="Agregar una nueva ruta entre dos ciudades")
+    def add_route(data: dict = Body(...)):
+        print(f"Datos recibidos para agregar ruta: {data}")
+        city1 = data.get("city1")
+        city2 = data.get("city2")
+        distance = data.get("distance")
+
+        if not all([city1, city2, distance]):
+            return {
+                "success": False,
+                "message": "Los campos 'city1', 'city2' y 'distance' son requeridos.",
+                "code": 400
+            }
+        if not isinstance(city1, str) or not city1.strip() or not isinstance(city2, str) or not city2.strip():
+            return {
+                "success": False,
+                "message": "Campos 'city1' y 'city2' deben ser cadenas de texto.",
+                "code": 400
+            }
+        if not isinstance(distance, int) or distance <= 0:
+            return {
+                "success": False,
+                "message": "El campo 'distance' debe ser un número entero positivo.",
+                "code": 400
+            }
+        
+        return service.add_route(city1, city2, distance)
 
     return router
