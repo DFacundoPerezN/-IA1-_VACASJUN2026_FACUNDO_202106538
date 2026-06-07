@@ -101,7 +101,7 @@ btnMejor.addEventListener('click', async () => {
     if (!o || !d) return alert("Selecciona origen y destino para buscar.");
     try {
         const datos = await fetchMejorRuta(o, d);
-        mostrarResultadosHtml("🏆 Ruta Óptima Detectada (Menor Distancia)", datos, false);
+        mostrarResultadosHtml("La Mejor Ruta que se encontró:", datos, false);
     } catch { alert("Error al procesar la mejor ruta."); }
 });
 
@@ -112,7 +112,7 @@ btnTodas.addEventListener('click', async () => {
         const datos = await fetchTodasLasRutas(o, d);
         // Manejamos si el json viene envuelto en un objeto o es la lista directa
         const listaRutas = Array.isArray(datos) ? datos : (datos.recorridos || Object.values(datos)[0]);
-        mostrarResultadosHtml("🔀 Todos los Caminos Alternativos Encontrados", listaRutas, true);
+        mostrarResultadosHtml(" Todos los Caminos Alternativos Encontrados", listaRutas, true);
     } catch { alert("Error al procesar los caminos de Prolog."); }
 });
 
