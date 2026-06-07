@@ -52,6 +52,12 @@ def cities_router(service: CityService) -> APIRouter:
                 "message": "El campo 'distance' debe ser un número entero positivo.",
                 "code": 400
             }
+        if city1.lower() == city2.lower():
+            return {
+                "success": False,
+                "message": "Las ciudades 'city1' y 'city2' no pueden ser la misma.",
+                "code": 400
+            }
         return service.add_route(city1, city2, distance)
 
     @router.get("/mejor_ruta", summary="Obtener la mejor ruta entre dos ciudades")
