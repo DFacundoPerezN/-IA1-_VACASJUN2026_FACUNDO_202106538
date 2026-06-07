@@ -1,0 +1,51 @@
+body {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+/* Contenedores de las tarjetas */
+section {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+
+/* Encabezados y etiquetas */
+h1, h2, h3, label {
+    color: #f1f5f9;
+}
+
+label {
+    color: #94a3b8;
+}
+
+/* Inputs y Selects */
+input, select {
+    background-color: #334155;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+/* Bordes divisorios */
+hr {
+    border-color: #334155;
+}
+
+/* Lista de ciudades */
+ul li {
+    color: #e2e8f0;
+    border-color: #334155;
+}
+
+/* Bloques de resultados inyectados */
+#contenedor-resultados div {
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+#contenedor-resultados span {
+    color: #cbd5e1;
+}

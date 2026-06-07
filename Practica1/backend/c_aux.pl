@@ -3,3 +3,4 @@
 
 ciudad(spares).
 ruta(francfort_del_meno, spares, 50).
+ciudad(dresde).
