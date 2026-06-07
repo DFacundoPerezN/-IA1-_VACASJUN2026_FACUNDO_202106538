@@ -10,7 +10,7 @@ En una sola pagiona se despliegan todas la funciones de la pagina web.
 
 ### 1- Ver ciudades
 
-En la parte media a la izquierda se alcanza a ver una lista desplegada con todas las ciudades qeu estan cargadas en el sistema. 
+En la parte media a la izquierda se alcanza a ver una lista desplegada con todas las ciudades qeu estan cargadas en el sistema.
 Por dar un ejemplo tenemos a:
 
 * Berlín
