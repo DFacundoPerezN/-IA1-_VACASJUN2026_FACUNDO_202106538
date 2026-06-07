@@ -25,14 +25,15 @@ response:
 
 request:
 
-````json
+```json
 {
     "city": "spares"
 }
 ```
+
 response:
 
-````json
+```json
 {
   "success": true,
   "message": "La ciudad 'spares' fue agregada exitosamente.",
@@ -44,19 +45,40 @@ response:
 
 request:
 
-````json
+```json
 {
   "city1": "spares",
   "city2": "francfort_del_meno",
   "distance": 50
 }
 ```
+
 response:
 
-````json
+```json
 {
   "success": true,
   "message": "La ciudad 'spares' fue agregada exitosamente.",
   "code": 201
+}
+```
+
+## 4. GET mejor recorrido/ruta para conectar dos ciudades 
+
+endpoint:
+
+### /ciudades/mejor_ruta?city2=munich&city1=berlin
+
+response:
+
+```json
+{
+    "cities": [
+        "berlin",
+        "leipzig",
+        "nuremberg",
+        "munich"
+    ],
+    "distance": 655
 }
 ```

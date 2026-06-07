@@ -118,3 +118,16 @@ class PrologRepo:
                 "message": f"Error al agregar ruta entre '{ciudad1}' y '{ciudad2}': {e}",
                 "code": 500
             }
+        
+    def obtener_mejor_ruta(self, ciudad1:str, ciudad2:str):
+        ciudad1_atom = self._to_prolog_atom(ciudad1)
+        ciudad2_atom = self._to_prolog_atom(ciudad2)
+
+        query_str = f"mejor_ruta({ciudad1_atom}, {ciudad2_atom}, Camino, Distancia)"
+        sol = self.query_one(query_str)
+        if not sol:
+            return None
+        return {
+            "cities": [str(c) for c in sol['Camino']],
+            "distance": sol['Distancia']
+        }

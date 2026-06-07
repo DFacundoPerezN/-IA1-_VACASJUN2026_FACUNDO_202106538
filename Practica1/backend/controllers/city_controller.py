@@ -52,7 +52,19 @@ def cities_router(service: CityService) -> APIRouter:
                 "message": "El campo 'distance' debe ser un número entero positivo.",
                 "code": 400
             }
-        
         return service.add_route(city1, city2, distance)
+
+    @router.get("/mejor_ruta", summary="Obtener la mejor ruta entre dos ciudades")
+    def get_best_route(city1: str, city2: str): 
+        
+        if not city1.strip() or not city2.strip():
+            return {
+                "success": False,
+                "message": "Los parámetros 'city1' y 'city2' no pueden estar vacíos.",
+                "code": 400
+            }
+        
+        return service.get_best_route(city1, city2)
+
 
     return router

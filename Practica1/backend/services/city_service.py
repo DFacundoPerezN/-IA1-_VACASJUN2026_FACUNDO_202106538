@@ -14,3 +14,5 @@ class CityService:
     def add_route(self, city1: str, city2: str, distance: int) -> dict:
         return self.city_repository.agregar_ruta(city1.lower(), city2.lower(), distance)
     
+    def get_best_route(self, city1: str, city2: str) -> dict:
+        return self.city_repository.obtener_mejor_ruta(city1.lower(), city2.lower())
