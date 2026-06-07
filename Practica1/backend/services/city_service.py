@@ -16,3 +16,6 @@ class CityService:
     
     def get_best_route(self, city1: str, city2: str) -> dict:
         return self.city_repository.obtener_mejor_ruta(city1.lower(), city2.lower())
+    
+    def get_all_routes(self, city1: str, city2: str) -> List[dict]:
+        return self.city_repository.obtener_recorridos(city1.lower(), city2.lower())

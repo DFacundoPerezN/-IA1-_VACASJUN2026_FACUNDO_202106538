@@ -131,3 +131,17 @@ class PrologRepo:
             "cities": [str(c) for c in sol['Camino']],
             "distance": sol['Distancia']
         }
+    
+    def obtener_recorridos(self, ciudad1:str, ciudad2:str):
+        ciudad1_atom = self._to_prolog_atom(ciudad1)
+        ciudad2_atom = self._to_prolog_atom(ciudad2)
+
+        query_str = f"recorrido({ciudad1_atom}, {ciudad2_atom}, Camino, Distancia)"
+        sols = self.query(query_str)
+        return [
+            {
+                "cities": [str(c) for c in sol['Camino']],
+                "distance": sol['Distancia']
+            }
+            for sol in sols
+        ]

@@ -63,7 +63,7 @@ response:
 }
 ```
 
-## 4. GET mejor recorrido/ruta para conectar dos ciudades 
+## 4. GET mejor recorrido/ruta para conectar dos ciudades
 
 endpoint:
 
@@ -80,5 +80,41 @@ response:
         "munich"
     ],
     "distance": 655
+}
+```
+
+## 5. GET todos los recorridos para conectar dos ciudades
+
+endpoint:
+
+### /ciudades/recorridos?city1=munich&city2=berlin
+
+response:
+
+```json
+{
+[
+    {
+        "cities": [
+          ...
+        ],
+        "distance": 1368
+    },
+    {
+        "cities": [
+          ...
+        ],
+        "distance": 1349
+    },
+    {
+        "cities": [
+            "munich",
+            "nuremberg",
+            "leipzig",
+            "berlin"
+        ],
+        "distance": 655
+    }
+]
 }
 ```

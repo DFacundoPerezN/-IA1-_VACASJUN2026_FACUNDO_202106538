@@ -76,6 +76,9 @@ recorrido_aux(Origen, Destino, Visitadas, ListaCiudades, Distancia) :-
 
 % recorrido(essen, dortmund, ListaCiudades, Distancia)
 
+get_recorridos(Origen, Destino, ListaRecorridos) :-
+    findall((ListaCiudades, Distancia), recorrido(Origen, Destino, ListaCiudades, Distancia), ListaRecorridos).
+
 % Ruta mas corta, ósea la mejor
 mejor_ruta(Origen, Destino, MejorCamino, MenorDistancia) :-
     % Encontrar Todas las combinaciones de caminos y distancias

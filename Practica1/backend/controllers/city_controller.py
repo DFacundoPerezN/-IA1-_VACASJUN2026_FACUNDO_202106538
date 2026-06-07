@@ -56,7 +56,7 @@ def cities_router(service: CityService) -> APIRouter:
 
     @router.get("/mejor_ruta", summary="Obtener la mejor ruta entre dos ciudades")
     def get_best_route(city1: str, city2: str): 
-        
+
         if not city1.strip() or not city2.strip():
             return {
                 "success": False,
@@ -65,6 +65,16 @@ def cities_router(service: CityService) -> APIRouter:
             }
         
         return service.get_best_route(city1, city2)
-
+    
+    @router.get("/recorridos", summary="Obtener todos los recorridos entre dos ciudades")
+    def get_all_routes(city1: str, city2: str):
+        if not city1.strip() or not city2.strip():
+            return {
+                "success": False,
+                "message": "Los parámetros 'city1' y 'city2' no pueden estar vacíos.",
+                "code": 400
+            }
+        
+        return service.get_all_routes(city1, city2)
 
     return router
