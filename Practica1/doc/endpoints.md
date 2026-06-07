@@ -92,7 +92,7 @@ endpoint:
 response:
 
 ```json
-{
+
 [
     {
         "cities": [
@@ -116,5 +116,5 @@ response:
         "distance": 655
     }
 ]
-}
+
 ```
