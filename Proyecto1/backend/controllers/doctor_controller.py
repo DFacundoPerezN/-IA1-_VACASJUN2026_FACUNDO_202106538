@@ -12,6 +12,16 @@ def doctor_router(service: DoctorService) -> APIRouter:
     def get_sintomas():
         return service.get_sintomas()
     
-
+    @router.post("/obtener_falla", summary="Obtener fallas por lista de sintomas")
+    def get_fallas(data: dict = Body(...)):
+        print(f"Datos recibidos para obtener falla: {data}")
+        listaSintomas = data.get("sintomas")
+        if not listaSintomas:
+            return {
+                "success": False,
+                "message": "El campo 'sintomas' es requerido.",
+                "code": 400
+            }
+        return service.get_falla(listaSintomas)
 
     return router
