@@ -6,7 +6,7 @@ from typing import List
 class PrologRepo:
     def __init__(self, prolog_file):
         self.prolog_file = Path(prolog_file).resolve()
-        self.aux_file = Path("c_aux.pl").resolve()
+        self.aux_file = Path("doc_aux.pl").resolve()
         self.prolog = Prolog()
         self._consult_file()
 
