@@ -5,4 +5,5 @@ class SintomsRepo(prolog_repo.PrologRepo):
         super().__init__(prolog_file)
 
     def get_sintomas(self):
-        return self.query("sintoma(X).")
+        sols = self.query("sintoma(X).")
+        return [str(sol['X']) for sol in sols]
