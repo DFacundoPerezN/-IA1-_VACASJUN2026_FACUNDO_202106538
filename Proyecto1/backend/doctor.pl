@@ -60,6 +60,8 @@ get_fallas(Lista):- findall(Falla, falla(Falla), Lista).
 get_recomendaciones(Lista):- findall(Recomendacion, recomendacion(Recomendacion), Lista).
 
 % subset/2
+:- discontiguous falla_causada_por/2.
+:- multifile falla_causada_por/2.
 
 % Relación: falla_causada_por(Falla, ListaDeSintomasRequeridos)
 falla_causada_por(sobrecalentamiento_procesador, [temperatura_elevada, ruido_desconocido, reinicio_inesperado]).
@@ -73,6 +75,8 @@ falla_causada_por(corto_circuito_usb, [desconexion_usb_constante, periferico_no_
 diagnosticar(ListaSintomasUsuario, Falla) :-
     falla_causada_por(Falla, SintomasRequeridos),
     subset(SintomasRequeridos, ListaSintomasUsuario), !.
+
+:- discontiguous tratamiento/2.
 
 % Relación: tratamiento(Falla, Recomendaciones)
 tratamiento(sobrecalentamiento_procesador, [limpiar_ventiladores, cambiar_pasta]).
@@ -90,3 +94,4 @@ obtener_recomendaciones(ListaSintomasUsuario, Recomendaciones) :-
 % consult('doctor.pl').sintoma(wifi_caido).
 falla(sin_modulo_wifi).
 recomendacion(instalar_modulo_wifi).
+sintoma(wifi_caido).

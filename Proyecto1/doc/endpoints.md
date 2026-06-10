@@ -143,3 +143,26 @@ response:
   "code": 201
 }
 ```
+
+## 7. POST Crear Conexión sintoma-fallo
+
+/doctor/recomendacion
+
+request:
+
+```json
+{
+    "falla":"sin_modulo_wifi",
+    "sintoma":"wifi_caido"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Relación falla sintoma actualizada",
+  "falla": "sin_modulo_wifi",
+  "sintoma": "wifi_caido"
+}
+```

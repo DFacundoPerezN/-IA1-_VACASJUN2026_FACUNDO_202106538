@@ -29,4 +29,58 @@ class SintomsRepo(prolog_repo.PrologRepo):
                 "message": f"Error al agregar el sintoma '{sintoma_atom}': {e}",
                 "code": 500
             }
+        
+    def falla_causada_por(self, falla, sintoma):
+        sintoma_atom = self._to_prolog_atom(sintoma)
+        falla_atom = self._to_prolog_atom(falla)
+
+        # Verificar que existan
+        if self.query_one(f"once(sintoma({sintoma_atom})).") is None:
+            return {"error": "Sintoma no existe"}
+        
+        if self.query_one(f"once(falla({falla_atom})).") is None:
+            return {"error": "Falla no existe"}
+        
+        contenido = self.prolog_file.read_text(encoding="utf-8").splitlines()
+
+        actualizado = False
+        nueva_lineas=[]
+
+        #caso 1 ya existe linea "falla_causada_por("
+        for linea in contenido:
+            s = linea.strip()
+
+            # detecta correctamente la falla y ayuda a evitar el bug
+            if s.startswith(f"falla_causada_por({falla_atom}"):
+                # escribe solo una vez el nuevo falla_causada_por
+                if not actualizado:
+                    #verificamos no repetir sintomas
+                    if sintoma in s:
+                        return {"error": f"El sitoma {sintoma} ya esta relacionado con la falla"}
+                    #dividimos en dos usando el nombre de la falla
+                    partes = s.split(falla_atom)
+                    partes[1] = partes[1].replace("]", f", {sintoma_atom}]")
+                    linea = f"{partes[0]}{falla_atom}{partes[1]}"
+                    #print("nueva linea: "+ linea)
+                    actualizado = True
+                # si ya actualizo no se debe de agregar la linea vieja asi que se debe de saltar
+                continue
+            nueva_lineas.append(linea)
+
+        # Si no tenía precio antes
+        if not actualizado:
+            nueva_linea =  f"falla_causada_por({falla_atom}, [{sintoma_atom}])."
+            nueva_lineas.append(nueva_linea)
+
+        #Sobreescribir el archivo
+        self.prolog_file.write_text("\n".join(nueva_lineas), encoding="utf-8")
+
+        #recargar prolog
+        self._consult_file()
+
+        return{
+            "mensaje": "Relación falla sintoma actualizada", 
+            "falla": falla_atom, 
+            "sintoma": sintoma_atom
+            }
                 

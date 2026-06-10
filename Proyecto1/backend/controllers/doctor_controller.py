@@ -78,5 +78,23 @@ def doctor_router(service: DoctorService) -> APIRouter:
                 "code": 400
             }
         return service.add_recomendacion(recomendacion)
+    
+    @router.post("/falla_sintoma", summary="Adjudicar sintoma a falla")
+    def conectar_falla_sintoma(data: dict = Body(...)):
+        falla = data.get("falla")
+        if not falla:
+            return {
+                "success": False,
+                "message": "El campo 'falla' es requerido.",
+                "code": 400
+            }
+        sintoma = data.get("sintoma")
+        if not sintoma:
+            return {
+                "success": False,
+                "message": "El campo 'sintoma' es requerido.",
+                "code": 400
+            }
+        return service.conectar_falla_sintoma(falla, sintoma)
 
     return router
