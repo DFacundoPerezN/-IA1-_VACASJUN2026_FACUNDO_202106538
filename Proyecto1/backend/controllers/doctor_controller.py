@@ -35,7 +35,7 @@ def doctor_router(service: DoctorService) -> APIRouter:
         return service.get_recomendaciones_by_falla(fail)
     
     @router.post("/recomendaciones", summary="Obtener recomendaciones por sintomas")
-    def get_recomendaciones_by_falla(data: dict = Body(...)):
+    def get_recomendaciones_by_sintomas(data: dict = Body(...)):
         listaSintomas = data.get("sintomas")
         listaSintomas = data.get("sintomas")
         if not listaSintomas:
@@ -45,5 +45,16 @@ def doctor_router(service: DoctorService) -> APIRouter:
                 "code": 400
             }
         return service.get_recomendaciones_by_sintomas(listaSintomas)
+
+    @router.post("/sintomas", summary="Agregar un nuevo síntoma")
+    def add_sintoma(data: dict = Body(...)):
+        sintoma = data.get("sintoma")
+        if not sintoma:
+            return {
+                "success": False,
+                "message": "El campo 'sintoma' es requerido.",
+                "code": 400
+            }
+        return service.add_sintoma(sintoma)
 
     return router

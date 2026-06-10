@@ -22,3 +22,6 @@ class DoctorService:
     
     def get_recomendaciones_by_sintomas(self, listaSintomas: List) :
         return self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
+    
+    def add_sintoma(self, sintoma: str):
+        return self.sintoms_repository.add_sintoma(sintoma)

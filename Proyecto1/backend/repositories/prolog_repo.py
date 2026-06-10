@@ -28,7 +28,6 @@ class PrologRepo:
     
     # Redefinir para atomizar datos
     _safe_atom_re = re.compile(r'^[a-z][a-zA-Z0-9_]*$')
-
     
     def _to_prolog_atom(self, s:str) -> str:
         s = s.strip()
