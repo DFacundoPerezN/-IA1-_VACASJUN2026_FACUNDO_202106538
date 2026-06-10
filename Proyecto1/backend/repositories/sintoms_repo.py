@@ -63,11 +63,10 @@ class SintomsRepo(prolog_repo.PrologRepo):
                     linea = f"{partes[0]}{falla_atom}{partes[1]}"
                     #print("nueva linea: "+ linea)
                     actualizado = True
-                # si ya actualizo no se debe de agregar la linea vieja asi que se debe de saltar
-                continue
+
             nueva_lineas.append(linea)
 
-        # Si no tenía precio antes
+        # Si no tenía conexion antes
         if not actualizado:
             nueva_linea =  f"falla_causada_por({falla_atom}, [{sintoma_atom}])."
             nueva_lineas.append(nueva_linea)
