@@ -39,3 +39,8 @@ class DoctorService:
         falla = falla.replace(" ","_").lower()
         sintoma = sintoma.replace(" ","_").lower()
         return self.sintoms_repository.falla_causada_por(falla, sintoma)
+    
+    def conectar_recomendacion_falla(self, recomendacion:str, falla:str) -> dict:
+        falla = falla.replace(" ","_").lower()
+        recomendacion = recomendacion.replace(" ","_")
+        return self.fails_repository.tratamiento(recomendacion, falla)

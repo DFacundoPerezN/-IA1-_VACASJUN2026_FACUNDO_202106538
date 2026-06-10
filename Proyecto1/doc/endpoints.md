@@ -144,9 +144,9 @@ response:
 }
 ```
 
-## 7. POST Crear Conexión sintoma-fallo
+## 8. POST Crear Conexión sintoma-fallo
 
-/doctor/recomendacion
+/doctor/falla_sintoma
 
 request:
 
@@ -164,5 +164,28 @@ response:
   "mensaje": "Relación falla sintoma actualizada",
   "falla": "sin_modulo_wifi",
   "sintoma": "wifi_caido"
+}
+```
+
+## 9. POST Crear Conexión falla-RECOMENDACION
+
+/doctor/recomendacion_falla
+
+request:
+
+```json
+{
+    "falla":"sin_modulo_wifi",
+    "recomendacion": "instalar_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Relación falla sintoma actualizada",
+  "falla": "sin_modulo_wifi",
+  "sintoma": "instalar_modulo_wifi"
 }
 ```
