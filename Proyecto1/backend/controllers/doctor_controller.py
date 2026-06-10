@@ -68,4 +68,15 @@ def doctor_router(service: DoctorService) -> APIRouter:
             }
         return service.add_falla(falla)
 
+    @router.post("/recomendacion", summary="Agregar nueva recomendacion")
+    def add_recomendacion(data: dict = Body(...)):
+        recomendacion = data.get("recomendacion")
+        if not recomendacion:
+            return {
+                "success": False,
+                "message": "El campo 'recomendacion' es requerido.",
+                "code": 400
+            }
+        return service.add_recomendacion(recomendacion)
+
     return router

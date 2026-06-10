@@ -24,7 +24,13 @@ class DoctorService:
         return self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
     
     def add_sintoma(self, sintoma: str) -> dict:
+        sintoma = sintoma.replace(" ","_")
         return self.sintoms_repository.add_sintoma(sintoma.lower())
     
     def add_falla(self, falla: str) -> dict:
+        falla = falla.replace(" ","_")
         return self.fails_repository.add_falla(falla.lower())
+    
+    def add_recomendacion(self, recomendacion: str) -> dict:
+        recomendacion = recomendacion.replace(" ","_")
+        return self.recom_repository.add_recomendacion(recomendacion.lower())

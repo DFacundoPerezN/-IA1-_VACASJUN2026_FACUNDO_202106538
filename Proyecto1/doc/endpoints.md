@@ -121,3 +121,25 @@ response:
   "code": 201
 }
 ```
+
+## 7. POST Crear Recomendacion
+
+/doctor/recomendacion
+
+request:
+
+```json
+{
+    "recomendacion": "instalar_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "success": true,
+  "message": "La recomendacion 'instalar_modulo_wifi' fue agregado con exito.",
+  "code": 201
+}
+```

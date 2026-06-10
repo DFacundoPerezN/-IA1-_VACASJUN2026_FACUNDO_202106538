@@ -41,3 +41,24 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
             "code": 201,
             "recommendations": [str(c) for c in sol['Recomendaciones']]
         }
+    
+    def add_recomendacion(self, recomendacion:str ):
+        recom_atom = self._to_prolog_atom(recomendacion)
+        try:
+            # Agregar nuevo recomendacion al prolog_file
+            with self.prolog_file.open('a') as f:
+                f.write(f"recomendacion({recom_atom}).\n")
+
+            self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ciudad
+            return {
+                "success": True,
+                "message": f"La recomendacion '{recom_atom}' fue agregada con exito.",
+                "code": 201
+            }
+        except Exception as e:
+            print(f"Error al agregar la recomendacion: {e}")
+            return {
+                "success": False,
+                "message": f"Error al agregar la recomendacion '{recom_atom}': {e}",
+                "code": 500
+            }
