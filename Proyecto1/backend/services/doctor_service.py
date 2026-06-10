@@ -18,10 +18,13 @@ class DoctorService:
         return self.fails_repository.get_falla_por_sintomas(listaSintomas)
     
     def get_recomendaciones_by_falla(self, falla: str) :
-        return self.recom_repository.get_recomendaciones_por_falla(falla)
+        return self.recom_repository.get_recomendaciones_por_falla(falla.lower())
     
     def get_recomendaciones_by_sintomas(self, listaSintomas: List) :
         return self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
     
-    def add_sintoma(self, sintoma: str):
-        return self.sintoms_repository.add_sintoma(sintoma)
+    def add_sintoma(self, sintoma: str) -> dict:
+        return self.sintoms_repository.add_sintoma(sintoma.lower())
+    
+    def add_falla(self, falla: str) -> dict:
+        return self.fails_repository.add_falla(falla.lower())

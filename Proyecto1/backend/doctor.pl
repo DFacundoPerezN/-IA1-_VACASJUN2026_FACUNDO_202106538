@@ -87,4 +87,5 @@ obtener_recomendaciones(ListaSintomasUsuario, Recomendaciones) :-
     diagnosticar(ListaSintomasUsuario, Falla),
     tratamiento(Falla, Recomendaciones).
 
-% consult('doctor.pl').
+% consult('doctor.pl').sintoma(wifi_caido).
+falla(sin_modulo_wifi).

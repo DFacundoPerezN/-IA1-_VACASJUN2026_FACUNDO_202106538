@@ -22,3 +22,25 @@ class FailsRepo(prolog_repo.PrologRepo):
             "code": 201,
             "falla": sol["Falla"]
         }
+
+    def add_falla(self, falla):
+        falla_atom = self._to_prolog_atom(falla)
+        try:
+            # Agregando falla al prolog_file
+            with self.prolog_file.open('a') as f:
+                f.write(f"falla({falla_atom}).\n")
+
+            self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ciudad
+            return {
+                "success": True,
+                "message": f"La falla '{falla_atom}' fue agregada con exitos.",
+                "code": 201
+            }
+        except Exception as e:
+            print(f"Error al agregar falla: {e}")
+            return {
+                "success": False,
+                "message": f"Error al agregar la falla '{falla_atom}': {e}",
+                "code": 500
+            }
+                
