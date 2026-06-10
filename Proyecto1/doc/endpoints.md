@@ -77,3 +77,47 @@ response:
   ]
 }
 ```
+
+## 5. POST Crear sintoma
+
+/doctor/sintoma
+
+request:
+
+```json
+{
+    "sintoma": "wifi_caido"
+}
+```
+
+response:
+
+```json
+{
+  "success": true,
+  "message": "El sintoma 'wifi_caido' fue agregado con exitoso.",
+  "code": 201
+}
+```
+
+## 6. POST Crear falla
+
+/doctor/falla
+
+request:
+
+```json
+{
+    "falla": "sin_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "success": true,
+  "message": "La falla 'sin_modulo_wifi' fue agregado con exitos.",
+  "code": 201
+}
+```
