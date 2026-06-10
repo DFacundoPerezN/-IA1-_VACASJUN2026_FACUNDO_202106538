@@ -8,9 +8,13 @@ def doctor_router(service: DoctorService) -> APIRouter:
     def get_health():
         return {"status": "healthy"}
 
-    @router.get("/sintomas", summary="Obtener todos los síntomas")
-    def get_sintomas():
-        return service.get_sintomas()
+    @router.get("/all_fallas", summary="Obtener todos las fallas")
+    def get_all_fallas():
+        return service.get_all_fallas()
+    
+    @router.get("/all_recomendaciones", summary="Obtener todos las recomendaciones")
+    def get_all_recomendaciones():
+        return service.get_all_recomendaciones()
     
     @router.post("/obtener_falla", summary="Obtener fallas por lista de sintomas")
     def get_fallas(data: dict = Body(...)):
@@ -22,7 +26,7 @@ def doctor_router(service: DoctorService) -> APIRouter:
                 "message": "El campo 'sintomas' es requerido.",
                 "code": 400
             }
-        return service.get_falla(listaSintomas)
+        return service.get_falla_by_sintomas(listaSintomas)
 
     @router.get("/recomendaciones", summary="Obtener recomendaciones por falla")
     def get_recomendaciones_by_falla(fail:str):

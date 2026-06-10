@@ -189,3 +189,34 @@ response:
   "sintoma": "instalar_modulo_wifi"
 }
 ```
+
+## 10. GET Para obtener todos las fallas
+
+/doctor/all_fallas
+
+response:
+
+```json
+[
+  "sobrecalentamiento_procesador",
+  //...
+  "corto_circuito_usb",
+  "sin_modulo_wifi"
+]
+```
+
+## 101. GET Para obtener todos las recomendaciones
+
+/doctor/all_recomendaciones
+
+response:
+
+```json
+[
+  "limpiar_ventiladores",
+  "cambiar_pasta",
+  //...
+  "actualizar_sistema_operativo",
+  "instalar_modulo_wifi"
+]
+```

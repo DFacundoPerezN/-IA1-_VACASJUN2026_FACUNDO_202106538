@@ -14,8 +14,11 @@ class DoctorService:
     def get_sintomas(self) -> List[str]:
         return self.sintoms_repository.get_sintomas()
     
-    def get_falla(self, listaSintomas: List) -> dict:
+    def get_falla_by_sintomas(self, listaSintomas: List) -> dict:
         return self.fails_repository.get_falla_por_sintomas(listaSintomas)
+    
+    def get_all_fallas(self) -> List[str]:
+        return self.fails_repository.get_fallas()
     
     def get_recomendaciones_by_falla(self, falla: str) :
         return self.recom_repository.get_recomendaciones_por_falla(falla.lower())
@@ -23,6 +26,9 @@ class DoctorService:
     def get_recomendaciones_by_sintomas(self, listaSintomas: List) :
         return self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
     
+    def get_all_recomendaciones(self) -> List[str]:
+        return self.recom_repository.get_recomendaciones()
+
     def add_sintoma(self, sintoma: str) -> dict:
         sintoma = sintoma.replace(" ","_")
         return self.sintoms_repository.add_sintoma(sintoma.lower())

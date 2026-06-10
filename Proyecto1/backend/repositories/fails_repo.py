@@ -1,9 +1,16 @@
 import repositories.prolog_repo as prolog_repo
+from typing import List
 
 class FailsRepo(prolog_repo.PrologRepo):
     def __init__(self, prolog_file):
         super().__init__(prolog_file)
 
+    def get_fallas(self) -> List[str]:
+        sol = self.query_one("get_fallas(Lista)")
+        if not sol:
+            return []
+        return [str(falla) for falla in sol['Lista']]
+    
     def get_falla_por_sintomas(self, lista):
         sintomas="["
         for i in lista:
