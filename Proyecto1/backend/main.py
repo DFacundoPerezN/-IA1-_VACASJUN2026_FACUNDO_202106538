@@ -2,6 +2,7 @@
 # .\venv\Scripts\Activate.ps1
 # pip install fastapi uvicorn pyswip
 # uvicorn main:app --reload
+# pip install requests python-dotenv
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

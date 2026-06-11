@@ -53,7 +53,7 @@ response:
 }
 ```
 
-## 4. POST Obtener recomendaciones segun sintoma
+## 4. POST Obtener recomendaciones segun sintomas
 
 /doctor/recomendaciones
 

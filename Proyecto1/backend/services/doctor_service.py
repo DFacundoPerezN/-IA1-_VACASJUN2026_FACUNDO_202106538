@@ -3,6 +3,7 @@ from repositories.prolog_repo import PrologRepo
 from repositories.sintoms_repo import SintomsRepo
 from repositories.fails_repo import FailsRepo
 from repositories.recommendations_repo import Recommendatios_Repo
+from telegram.bot import enviar_falla, enviar_recomendaciones
 
 class DoctorService:
     def __init__(self, prolog_repo: PrologRepo):
@@ -15,7 +16,9 @@ class DoctorService:
         return self.sintoms_repository.get_sintomas()
     
     def get_falla_by_sintomas(self, listaSintomas: List) -> dict:
-        return self.fails_repository.get_falla_por_sintomas(listaSintomas)
+        response = self.fails_repository.get_falla_por_sintomas(listaSintomas)
+        enviar_falla(listaSintomas, response["falla"])
+        return response
     
     def get_all_fallas(self) -> List[str]:
         return self.fails_repository.get_fallas()
@@ -24,7 +27,9 @@ class DoctorService:
         return self.recom_repository.get_recomendaciones_por_falla(falla.lower())
     
     def get_recomendaciones_by_sintomas(self, listaSintomas: List) :
-        return self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
+        response = self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
+        enviar_recomendaciones(listaSintomas, response["recommendations"])
+        return response
     
     def get_all_recomendaciones(self) -> List[str]:
         return self.recom_repository.get_recomendaciones()
