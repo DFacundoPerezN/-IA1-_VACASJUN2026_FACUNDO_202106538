@@ -73,8 +73,8 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
     def delete_recomendacion(self, recomendacion)->dict:
         recom_atom = self._to_prolog_atom(recomendacion)
 
-        # if self.query_one(f"once(recomendacion({recom_atom})).") is None:
-        #     return {"error": "Recomendacion no existe"}
+        if self.query_one(f"once(recomendacion({recom_atom})).") is None:
+            return {"error": "Recomendacion no existe"}
                 
         lineas = self.prolog_file.read_text(encoding="utf-8").splitlines()
 
@@ -104,4 +104,26 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
         return{
             "mensaje": "Recomendacion borrada", 
             "recomendacion": recom_atom
+        }
+    
+    def update_recommendation(self, old_name, new_name):
+        old_atom = self._to_prolog_atom(old_name)
+        new_atom = self._to_prolog_atom(new_name)
+        
+        if self.query_one(f"once(recomendacion({old_atom})).") is None:
+            return {"error": f"Recomendacion {old_atom} no existe"}
+
+        # if self.query_one(f"once(recomendacion({new_atom})).") is not None:
+        #     return {"error": f"Recomendacion con el nuevo nombre {new_atom} ya existe"}
+
+        content = self.prolog_file.read_text(encoding="utf-8")
+        content = content.replace(old_atom, new_atom)
+
+        self.prolog_file.write_text(content, encoding="utf-8")
+        self._consult_file()
+
+        return{
+            "mensaje": "Recomendacion editada", 
+            "nombre_viejo": old_atom,
+            "nombre_nuevo": new_atom
         }

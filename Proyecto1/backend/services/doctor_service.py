@@ -72,3 +72,8 @@ class DoctorService:
         old = old.replace(" ","_").lower()
         new = new.replace(" ","_").lower()
         return self.fails_repository.update_fail(old, new)
+    
+    def update_recomendacion(self, old: str, new:str) -> dict:
+        old = old.replace(" ","_").lower()
+        new = new.replace(" ","_").lower()
+        return self.recom_repository.update_recommendation(old, new)

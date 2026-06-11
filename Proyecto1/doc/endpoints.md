@@ -329,3 +329,26 @@ response:
   "nombre_nuevo": "falta_modulo_wifi"
 }
 ```
+
+## 17. PUT Editar nombre de Recomendacion
+
+/doctor/recomendacion
+
+request:
+
+```json
+{
+    "nuevo":"instalar_nuevo_modulo_wifi",
+    "viejo":"instalar_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Recomendacion editada",
+  "nombre_viejo": "instalar_modulo_wifi",
+  "nombre_nuevo": "instalar_nuevo_modulo_wifi"
+}
+```
