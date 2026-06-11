@@ -131,4 +131,10 @@ def doctor_router(service: DoctorService) -> APIRouter:
 
         return service.delete_falla(falla)
 
+    @router.delete("/delete_recomendacion")
+    def delete_recomendacion(data: dict = Body(...)):
+        recomendacion = data.get("recomendacion")
+
+        return service.delete_recomendacion(recomendacion)
+
     return router

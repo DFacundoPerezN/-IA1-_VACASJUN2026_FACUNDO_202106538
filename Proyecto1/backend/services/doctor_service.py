@@ -58,3 +58,7 @@ class DoctorService:
     def delete_falla(self, falla: str) -> dict:
         falla = falla.replace(" ","_")
         return self.fails_repository.delete_fail(falla)
+    
+    def delete_recomendacion(self, recomendacion: str) -> dict:
+        recomendacion = recomendacion.replace(" ","_")
+        return self.recom_repository.delete_recomendacion(recomendacion)

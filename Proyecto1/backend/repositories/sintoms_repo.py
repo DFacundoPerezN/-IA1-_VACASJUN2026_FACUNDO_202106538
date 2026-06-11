@@ -89,7 +89,6 @@ class SintomsRepo(prolog_repo.PrologRepo):
         if self.query_one(f"once(sintoma({sintoma_atom})).") is None:
             return {"error": "Sintoma no existe"}
         
-        
         lineas = self.prolog_file.read_text(encoding="utf-8").splitlines()
 
         sintoma_linea = f"sintoma({sintoma_atom})."
@@ -103,9 +102,9 @@ class SintomsRepo(prolog_repo.PrologRepo):
 
             if l.startswith("falla_causada_por("):
                 if sintoma_atom in l:
-                    if ',' in l:    
+                    if "," in l:    
                         l = l.replace(f", {sintoma_atom}","")
-                        l = l.replace(f"[{sintoma_atom}, ","[")
+                        linea = l.replace(f"[{sintoma_atom}, ","[")
                     elif f"[{sintoma_atom}]" in l:
                         continue
 

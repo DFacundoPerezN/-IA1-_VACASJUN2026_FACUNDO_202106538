@@ -69,3 +69,39 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
                 "message": f"Error al agregar la recomendacion '{recom_atom}': {e}",
                 "code": 500
             }
+        
+    def delete_recomendacion(self, recomendacion)->dict:
+        recom_atom = self._to_prolog_atom(recomendacion)
+
+        # if self.query_one(f"once(recomendacion({recom_atom})).") is None:
+        #     return {"error": "Recomendacion no existe"}
+                
+        lineas = self.prolog_file.read_text(encoding="utf-8").splitlines()
+
+        recom_linea = f"recomendacion({recom_atom})."
+        nuevas_lineas = []
+
+        for linea in lineas:
+            l = linea.strip()
+
+            if l == recom_linea:
+                continue
+
+            if l.startswith("tratamiento("):
+                if recom_atom in l:
+                    print("linea con tratamiento y recomendacion: "+l)
+                    if "," in l:    
+                        l = l.replace(f", {recom_atom}","")
+                        linea = l.replace(f"[{recom_atom}, ","[")
+                    elif f"[{recom_atom}]" in l:
+                        continue
+
+            nuevas_lineas.append(linea)               
+            
+        self.prolog_file.write_text("\n".join(nuevas_lineas), encoding="utf-8")
+        self._consult_file()
+
+        return{
+            "mensaje": "Recomendacion borrada", 
+            "recomendacion": recom_atom
+        }

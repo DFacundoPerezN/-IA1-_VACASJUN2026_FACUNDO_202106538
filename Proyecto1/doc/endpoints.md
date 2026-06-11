@@ -262,3 +262,24 @@ response:
   "falla": "sin_modulo_wifi"
 }
 ```
+
+## 14. DELETE Recomendacion
+
+/doctor/delete_recomendacion
+
+request:
+
+```json
+{
+    "recomendacion": "instalar_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Recomendacion borrada",
+  "recomendacion": "instalar_modulo_wifi"
+}
+```
