@@ -92,8 +92,8 @@ obtener_recomendaciones(ListaSintomasUsuario, Recomendaciones) :-
     tratamiento(Falla, Recomendaciones).
 
 % consult('doctor.pl').
-falla(sin_modulo_wifi).
+falla(falta_modulo_wifi).
 recomendacion(instalar_modulo_wifi).
 sintoma(wifi_caido).
-falla_causada_por(sin_modulo_wifi, [wifi_caido, periferico_no_reconocido]).
-tratamiento(sin_modulo_wifi, [limpiar_contactos, instalar_modulo_wifi]).
+falla_causada_por(falta_modulo_wifi, [wifi_caido, periferico_no_reconocido]).
+tratamiento(falta_modulo_wifi, [limpiar_contactos, instalar_modulo_wifi]).

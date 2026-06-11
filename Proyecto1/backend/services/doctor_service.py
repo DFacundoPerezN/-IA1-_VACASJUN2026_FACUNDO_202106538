@@ -67,3 +67,8 @@ class DoctorService:
         old = old.replace(" ","_").lower()
         new = new.replace(" ","_").lower()
         return self.sintoms_repository.update_sintom(old, new)
+    
+    def update_falla(self, old: str, new:str) -> dict:
+        old = old.replace(" ","_").lower()
+        new = new.replace(" ","_").lower()
+        return self.fails_repository.update_fail(old, new)

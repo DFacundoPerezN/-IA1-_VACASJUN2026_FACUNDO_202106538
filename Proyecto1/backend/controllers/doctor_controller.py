@@ -148,5 +148,18 @@ def doctor_router(service: DoctorService) -> APIRouter:
                 "code": 400
             }
         return service.update_sintoma(viejo, nuevo)
+    
+    @router.put("/falla")
+    def update_falla(data: dict = Body(...)):
+        viejo = data.get("viejo")
+        nuevo = data.get("nuevo")
+        if not viejo or not nuevo:
+            return {
+                "success": False,
+                "message": "Los campos 'nuevo' y 'viejo son requeridos.",
+                "code": 400
+            }
+        return service.update_falla(viejo, nuevo)
+
 
     return router

@@ -138,4 +138,24 @@ class FailsRepo(prolog_repo.PrologRepo):
             "falla": falla_atom
         }
 
-                
+    def update_fail(self, old_name, new_name):
+        old_atom = self._to_prolog_atom(old_name)
+        new_atom = self._to_prolog_atom(new_name)
+        
+        if self.query_one(f"once(falla({old_atom})).") is None:
+            return {"error": "Falla no existe"}
+
+        # if self.query_one(f"once(falla({new_atom})).") is not None:
+        #     return {"error": "Falla con el nuevo nombre ya existe"}
+
+        content = self.prolog_file.read_text(encoding="utf-8")
+        content = content.replace(old_atom, new_atom)
+
+        self.prolog_file.write_text(content, encoding="utf-8")
+        self._consult_file()
+
+        return{
+            "mensaje": "Falla editada", 
+            "nombre_viejo": old_atom,
+            "nombre_nuevo": new_atom
+        }

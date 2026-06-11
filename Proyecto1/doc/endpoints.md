@@ -284,7 +284,7 @@ response:
 }
 ```
 
-## 15. PUT Sintoma
+## 15. PUT Editar nombre de Sintoma
 
 /doctor/sintoma
 
@@ -304,5 +304,28 @@ response:
   "mensaje": "Sintoma editado",
   "nombre_viejo": "wifi_caido",
   "nuevo_nombre": "sin_wifi"
+}
+```
+
+## 16. PUT Editar nombre de Falla
+
+/doctor/falla
+
+request:
+
+```json
+{
+    "nuevo":"falta_modulo_wifi",
+    "viejo":"sin_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Falla editada",
+  "nombre_viejo": "sin_modulo_wifi",
+  "nombre_nuevo": "falta_modulo_wifi"
 }
 ```
