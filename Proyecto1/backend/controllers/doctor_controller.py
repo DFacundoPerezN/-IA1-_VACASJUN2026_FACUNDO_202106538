@@ -118,5 +118,11 @@ def doctor_router(service: DoctorService) -> APIRouter:
                 "code": 400
             }
         return service.conectar_recomendacion_falla(recomendacion, falla)
+    
+    @router.delete("/delete_sintoma")
+    def delete_sintoma(data: dict = Body(...)):
+        sintoma = data.get("sintoma")
+
+        return service.delete_sintoma(sintoma)
 
     return router

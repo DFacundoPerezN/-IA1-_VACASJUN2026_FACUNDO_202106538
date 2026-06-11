@@ -205,7 +205,7 @@ response:
 ]
 ```
 
-## 101. GET Para obtener todos las recomendaciones
+## 11. GET Para obtener todos las recomendaciones
 
 /doctor/all_recomendaciones
 

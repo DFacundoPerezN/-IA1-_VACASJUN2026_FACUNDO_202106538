@@ -50,3 +50,8 @@ class DoctorService:
         falla = falla.replace(" ","_").lower()
         recomendacion = recomendacion.replace(" ","_")
         return self.fails_repository.tratamiento(recomendacion, falla)
+    
+    def delete_sintoma(self, sintoma:str) -> dict:
+        sintoma = sintoma.replace(" ","_").lower()
+        return self.sintoms_repository.delete_sintom(sintoma)
+        

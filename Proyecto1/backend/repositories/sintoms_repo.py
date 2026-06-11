@@ -82,4 +82,41 @@ class SintomsRepo(prolog_repo.PrologRepo):
             "falla": falla_atom, 
             "sintoma": sintoma_atom
             }
-                
+    
+    def delete_sintom(self, sintoma)->dict:
+        sintoma_atom = self._to_prolog_atom(sintoma)
+
+        if self.query_one(f"once(sintoma({sintoma_atom})).") is None:
+            return {"error": "Sintoma no existe"}
+        
+        
+        lineas = self.prolog_file.read_text(encoding="utf-8").splitlines()
+
+        sintoma_linea = f"sintoma({sintoma_atom})."
+        nuevas_lineas = []
+
+        for linea in lineas:
+            l = linea.strip()
+
+            if l == sintoma_linea:
+                continue
+
+            if l.startswith("falla_causada_por("):
+                if sintoma_atom in l:
+                    if ',' in l:    
+                        l = l.replace(f", {sintoma_atom}","")
+                        l = l.replace(f"[{sintoma_atom}, ","[")
+                    elif f"[{sintoma_atom}]" in l:
+                        continue
+
+            nuevas_lineas.append(l)               
+            
+        self.prolog_file.write_text("\n".join(nuevas_lineas), encoding="utf-8")
+        self._consult_file()
+
+        return{
+            "mensaje": "Sintoma borrado", 
+            "sintoma": sintoma_atom
+        }
+
+
