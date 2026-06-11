@@ -118,4 +118,21 @@ class SintomsRepo(prolog_repo.PrologRepo):
             "sintoma": sintoma_atom
         }
 
+    def update_sintom(self, old_name, new_name):
+        old_atom = self._to_prolog_atom(old_name)
+        new_atom = self._to_prolog_atom(new_name)
+        
+        if self.query_one(f"once(sintoma({old_atom})).") is None:
+            return {"error": "Sintoma no existe"}
 
+        content = self.prolog_file.read_text(encoding="utf-8")
+        content = content.replace(old_atom, new_atom)
+
+        self.prolog_file.write_text(content, encoding="utf-8")
+        self._consult_file()
+
+        return{
+            "mensaje": "Sintoma editado", 
+            "nombre_viejo": old_atom,
+            "nuevo_nombre": new_atom
+        }

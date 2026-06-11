@@ -137,4 +137,16 @@ def doctor_router(service: DoctorService) -> APIRouter:
 
         return service.delete_recomendacion(recomendacion)
 
+    @router.put("/sintoma")
+    def update_sintoma(data: dict = Body(...)):
+        viejo = data.get("viejo")
+        nuevo = data.get("nuevo")
+        if not viejo or not nuevo:
+            return {
+                "success": False,
+                "message": "Los campos 'nuevo' y 'viejo son requeridos.",
+                "code": 400
+            }
+        return service.update_sintoma(viejo, nuevo)
+
     return router

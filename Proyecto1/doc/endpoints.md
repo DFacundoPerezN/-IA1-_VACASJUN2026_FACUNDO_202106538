@@ -283,3 +283,26 @@ response:
   "recomendacion": "instalar_modulo_wifi"
 }
 ```
+
+## 15. PUT Sintoma
+
+/doctor/sintoma
+
+request:
+
+```json
+{
+    "viejo":"wifi_caido",
+    "nuevo":"sin_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Sintoma editado",
+  "nombre_viejo": "wifi_caido",
+  "nuevo_nombre": "sin_wifi"
+}
+```

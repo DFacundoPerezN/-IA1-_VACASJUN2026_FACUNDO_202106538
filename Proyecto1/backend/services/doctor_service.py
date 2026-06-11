@@ -56,9 +56,14 @@ class DoctorService:
         return self.sintoms_repository.delete_sintom(sintoma)
         
     def delete_falla(self, falla: str) -> dict:
-        falla = falla.replace(" ","_")
+        falla = falla.replace(" ","_").lower()
         return self.fails_repository.delete_fail(falla)
     
     def delete_recomendacion(self, recomendacion: str) -> dict:
-        recomendacion = recomendacion.replace(" ","_")
+        recomendacion = recomendacion.replace(" ","_").lower()
         return self.recom_repository.delete_recomendacion(recomendacion)
+    
+    def update_sintoma(self, old: str, new:str) -> dict:
+        old = old.replace(" ","_").lower()
+        new = new.replace(" ","_").lower()
+        return self.sintoms_repository.update_sintom(old, new)
