@@ -47,12 +47,12 @@ recomendacion(probar_otra_fuente_poder).
 recomendacion(reinstalar_controladores).
 recomendacion(analizar_sistema_con_antivirus).
 recomendacion(reparar_inicio_desde_consola_sistema).
-recomendacion(cambiar_tarjeta_red). 
+recomendacion(cambiar_tarjeta_red).
 recomendacion(usar_adaptador_usb).
 recomendacion(desconectar_puertos_frontales).
 recomendacion(actualizar_sistema_operativo).
 
-% Reglas 
+% Reglas
 
 % getters
 get_sintomas(Lista):- findall(Sintoma, sintoma(Sintoma), Lista).

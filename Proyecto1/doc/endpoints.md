@@ -220,3 +220,24 @@ response:
   "instalar_modulo_wifi"
 ]
 ```
+
+## 12. DELETE sintoma
+
+/doctor/delete_sintoma
+
+request:
+
+```json
+{
+    "sintoma":"periferico_no_reconocido"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Sintoma borrado",
+  "sintoma": "periferico_no_reconocido"
+}
+```

@@ -109,7 +109,7 @@ class SintomsRepo(prolog_repo.PrologRepo):
                     elif f"[{sintoma_atom}]" in l:
                         continue
 
-            nuevas_lineas.append(l)               
+            nuevas_lineas.append(linea)               
             
         self.prolog_file.write_text("\n".join(nuevas_lineas), encoding="utf-8")
         self._consult_file()
