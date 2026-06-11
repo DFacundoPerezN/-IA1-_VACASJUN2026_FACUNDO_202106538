@@ -241,3 +241,24 @@ response:
   "sintoma": "periferico_no_reconocido"
 }
 ```
+
+## 13. DELETE falla
+
+/doctor/delete_falla
+
+request:
+
+```json
+{
+    "falla":"sin_modulo_wifi"
+}
+```
+
+response:
+
+```json
+{
+  "mensaje": "Falla borrada",
+  "falla": "sin_modulo_wifi"
+}
+```

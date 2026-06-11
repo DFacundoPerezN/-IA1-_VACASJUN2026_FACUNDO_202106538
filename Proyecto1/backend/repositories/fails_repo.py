@@ -104,4 +104,38 @@ class FailsRepo(prolog_repo.PrologRepo):
             "recomendacion": recom_atom
             }
                 
+    def delete_fail(self, falla)->dict:
+        falla_atom = self._to_prolog_atom(falla)
+
+        if self.query_one(f"once(falla({falla_atom})).") is None:
+            return {"error": "Falla no existe"}
+        
+        
+        lineas = self.prolog_file.read_text(encoding="utf-8").splitlines()
+
+        falla_linea = f"falla({falla_atom})."
+        nuevas_lineas = []
+
+        for linea in lineas:
+            l = linea.strip()
+
+            if l == falla_linea:
+                continue
+
+            if l.startswith(f"falla_causada_por({falla_atom}"):
+                continue
+
+            if l.startswith(f"tratamiento({falla_atom}"):
+                continue
+
+            nuevas_lineas.append(linea)               
+            
+        self.prolog_file.write_text("\n".join(nuevas_lineas), encoding="utf-8")
+        self._consult_file()
+
+        return{
+            "mensaje": "Falla borrada", 
+            "falla": falla_atom
+        }
+
                 

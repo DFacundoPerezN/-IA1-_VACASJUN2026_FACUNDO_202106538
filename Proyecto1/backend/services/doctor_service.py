@@ -55,3 +55,6 @@ class DoctorService:
         sintoma = sintoma.replace(" ","_").lower()
         return self.sintoms_repository.delete_sintom(sintoma)
         
+    def delete_falla(self, falla: str) -> dict:
+        falla = falla.replace(" ","_")
+        return self.fails_repository.delete_fail(falla)
