@@ -17,7 +17,8 @@ class DoctorService:
     
     def get_falla_by_sintomas(self, listaSintomas: List) -> dict:
         response = self.fails_repository.get_falla_por_sintomas(listaSintomas)
-        enviar_falla(listaSintomas, response["falla"])
+        if (response["falla"] is not None ) and (response["falla"] != []):
+            enviar_falla(listaSintomas, response["falla"])
         return response
     
     def get_all_fallas(self) -> List[str]:
@@ -28,7 +29,8 @@ class DoctorService:
     
     def get_recomendaciones_by_sintomas(self, listaSintomas: List) :
         response = self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
-        enviar_recomendaciones(listaSintomas, response["recommendations"])
+        if (response["recommendations"] is not None ) and (response["recommendations"] != []):
+            enviar_recomendaciones(listaSintomas, response["recommendations"])
         return response
     
     def get_all_recomendaciones(self) -> List[str]:

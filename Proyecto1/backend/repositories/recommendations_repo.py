@@ -24,6 +24,7 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
             return {    
                 "code": 201,
                 "falla": None,
+                "recommendations":[],
                 "message": "No se encontró una falla designada a esos sintomas"
             }
 
@@ -41,6 +42,7 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
             return {    
                 "code": 201,
                 "falla": None,
+                "recommendations":[],
                 "message": "No se encontró una falla designada a esos sintomas"
             }
 

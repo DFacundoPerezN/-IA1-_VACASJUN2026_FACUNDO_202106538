@@ -7,7 +7,11 @@ def doctor_router(service: DoctorService) -> APIRouter:
     @router.get("/health", summary="Verificar el estado de la API")
     def get_health():
         return {"status": "healthy"}
-
+    
+    @router.get("/sintomas", summary="Obtener todos los síntomas")
+    def get_sintomas():
+        return service.get_sintomas()
+    
     @router.get("/all_fallas", summary="Obtener todos las fallas")
     def get_all_fallas():
         return service.get_all_fallas()

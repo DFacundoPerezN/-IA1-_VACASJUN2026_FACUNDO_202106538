@@ -34,7 +34,7 @@ def enviar_recomendaciones(listaSintomas, listaRecomendaciones, chat_id = CHAT_I
     
     for recomendacion in listaRecomendaciones:
         texto += "  * "+ recomendacion.replace("_", " ") +"\n"
-    texto += "\n\nEsperamos qe su esquipo mejore pronto :)"
+    texto += "\n\nEsperamos que su equipo mejore pronto :)"
 
     
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
@@ -51,7 +51,7 @@ def enviar_recomendaciones(listaSintomas, listaRecomendaciones, chat_id = CHAT_I
     else:
         print("Error al enviar el mensaje: ", response.text)
 
-def enviar_falla(listaSintomas, falla: str, chat_id = CHAT_ID):
+def enviar_falla(listaSintomas, falla, chat_id = CHAT_ID):
     texto = "Se analizaron los sintomas dados: \n"
     for sintoma in listaSintomas:
         texto += "  * "+ sintoma +"\n"
