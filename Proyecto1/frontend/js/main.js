@@ -4,6 +4,8 @@ const listaSintomasDiv = document.getElementById('lista-sintomas');
 const btnDiagnosticar = document.getElementById('btn-diagnosticar');
 const divResultado = document.getElementById('resultado');
 const ulRecomendaciones = document.getElementById('recomendaciones');
+const ulHistorial = document.getElementById('lista-historial');
+const btnLimpiarHistorial = document.getElementById('btn-limpiar-historial');
 
 /**
  * Carga los síntomas desde la API y crea checkboxes
@@ -20,6 +22,49 @@ async function cargarSintomas() {
     } catch (e) {
         listaSintomasDiv.innerHTML = `<p class="text-red-400">Error al cargar síntomas.</p>`;
     }
+}
+/**
+ * Renderiza el historial almacenado en LocalStorage
+ */
+function mostrarHistorial() {
+    const historial = JSON.parse(localStorage.getItem('doctor_byte_history')) || [];
+    
+    if (historial.length === 0) {
+        ulHistorial.innerHTML = `<li class="text-slate-500 italic">No hay consultas recientes.</li>`;
+        return;
+    }
+
+    ulHistorial.innerHTML = historial.map(item => `
+        <li class="bg-slate-800/60 p-2.5 rounded border border-slate-700/50 flex flex-col gap-1">
+            <div class="flex justify-between text-xs text-slate-400 font-mono">
+                <span>${item.fecha}</span>
+                <span class="text-green-400 font-bold">${item.falla}</span>
+            </div>
+            <div class="text-slate-300 capitalize text-xs">
+                Síntomas: ${item.sintomas.join(', ').replace(/_/g, ' ')}
+            </div>
+        </li>
+    `).join('');
+}
+
+/**
+ * Guarda una nueva entrada en el historial local
+ */
+function guardarEnHistorial(sintomas, fallaDetectada) {
+    const historial = JSON.parse(localStorage.getItem('doctor_byte_history')) || [];
+    
+    const nuevaConsulta = {
+        fecha: new Date().toLocaleString(),
+        sintomas: sintomas,
+        falla: fallaDetectada ? fallaDetectada.replace(/_/g, ' ') : "Falla Desconocida"
+    };
+
+    // Agregar al inicio y mantener un límite máximo de 10 registros
+    historial.unshift(nuevaConsulta);
+    if (historial.length > 10) historial.pop();
+
+    localStorage.setItem('doctor_byte_history', JSON.stringify(historial));
+    mostrarHistorial();
 }
 
 /**
@@ -53,6 +98,8 @@ btnDiagnosticar.addEventListener('click', async () => {
             `<li class="mb-1 capitalize">${rec.replace(/_/g, ' ')}</li>`
         ).join('') || "<li>No hay recomendaciones disponibles.</li>";
 
+        guardarEnHistorial(seleccionados, resFalla.falla);
+
     } catch (e) {
         divResultado.innerText = "Error en el diagnóstico.";
         console.error(e);
@@ -60,4 +107,7 @@ btnDiagnosticar.addEventListener('click', async () => {
 });
 
 // Inicializar
-document.addEventListener('DOMContentLoaded', cargarSintomas);
+document.addEventListener('DOMContentLoaded', () => {
+    cargarSintomas();
+    mostrarHistorial();
+});
