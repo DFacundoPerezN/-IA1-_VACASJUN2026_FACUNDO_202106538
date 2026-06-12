@@ -6,7 +6,7 @@
     },
     {
         "categoria":"manga",
-        "pregunta": "¿En qué revista se pública Dragon Ball?",
+        "pregunta": "¿En qué revista se publica Dragon Ball?",
         "respuesta": "En la Shonen Jump"
     },
     {
@@ -36,8 +36,8 @@
     },
     {
         "categoria":"videojuegos",
-        "pregunta": "¿Cuál es la mejor consola calidad/precio?",
-        "respuesta": "XBox Series S"
+        "pregunta": "¿Cuál es la mejor consola calidad/precio con membresia?",
+        "respuesta": "XBox Series S con su membresia qeu da una biblioteca amplia de juegos."
     },
     {
         "categoria":"videojuegos",
@@ -86,7 +86,7 @@
     },
     {
         "categoria":"historia",
-        "pregunta": "¿Cuál fue el mayor descubrimiento?",
+        "pregunta": "¿Cuál fue el mayor descubrimiento del final de la Edad Media?",
         "respuesta": "El descubrimiento de América."
     },
     {
