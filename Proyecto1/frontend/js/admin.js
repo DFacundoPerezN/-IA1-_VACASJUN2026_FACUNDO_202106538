@@ -4,11 +4,12 @@ export const admin = {
     // Inicializa la interfaz cargando todos los datos actuales
     async inicializar() {
         try {
-            // Endpoints 1, 10
+            // Consultas secuenciales estrictas para evitar consultas anidadas en Prolog
             const sintomas = await fetch(`${URL}/sintomas`).then(r => r.json());
             const fallas = await fetch(`${URL}/all_fallas`).then(r => r.json());
+            const recomendaciones = await fetch(`${URL}/all_recomendaciones`).then(r => r.json());
 
-            // Llenar listas de administracion con botones de accion
+            // Renderizar Lista de Sintomas
             document.getElementById('lista-sintomas-admin').innerHTML = sintomas.map(s => `
                 <li class="flex justify-between items-center bg-slate-700/40 p-2 rounded border border-slate-700">
                     <span class="capitalize text-sm">${s.replace(/_/g, ' ')}</span>
@@ -19,6 +20,7 @@ export const admin = {
                 </li>
             `).join('');
 
+            // Renderizar Lista de Fallas
             document.getElementById('lista-fallas-admin').innerHTML = fallas.map(f => `
                 <li class="flex justify-between items-center bg-slate-700/40 p-2 rounded border border-slate-700">
                     <span class="capitalize text-sm">${f.replace(/_/g, ' ')}</span>
@@ -29,7 +31,18 @@ export const admin = {
                 </li>
             `).join('');
 
-            // Llenar los Selects de la conexion (Relaciones)
+            // Renderizar Lista de Recomendaciones
+            document.getElementById('lista-recomendaciones-admin').innerHTML = recomendaciones.map(r => `
+                <li class="flex justify-between items-center bg-slate-700/40 p-2 rounded border border-slate-700">
+                    <span class="capitalize text-sm">${r.replace(/_/g, ' ')}</span>
+                    <div class="flex gap-1">
+                        <button onclick="admin.editar('recomendacion', '${r}')" class="text-xs bg-amber-600 px-2 py-1 rounded hover:bg-amber-700">Editar</button>
+                        <button onclick="admin.borrar('recomendacion', '${r}')" class="text-xs bg-rose-600 px-2 py-1 rounded hover:bg-rose-700">Borrar</button>
+                    </div>
+                </li>
+            `).join('');
+
+            // Llenar Selects de Relacion Falla-Sintoma
             document.getElementById('select-sintoma').innerHTML = 
                 '<option value="" disabled selected>Selecciona sintoma...</option>' +
                 sintomas.map(s => `<option value="${s}">${s.replace(/_/g, ' ')}</option>`).join('');
@@ -38,11 +51,38 @@ export const admin = {
                 '<option value="" disabled selected>Selecciona falla...</option>' +
                 fallas.map(f => `<option value="${f}">${f.replace(/_/g, ' ')}</option>`).join('');
 
+            // Llenar Selects de Relacion Falla-Recomendacion
+            document.getElementById('select-falla-rec').innerHTML = 
+                '<option value="" disabled selected>Selecciona falla...</option>' +
+                fallas.map(f => `<option value="${f}">${f.replace(/_/g, ' ')}</option>`).join('');
+
+            document.getElementById('select-recomendacion').innerHTML = 
+                '<option value="" disabled selected>Selecciona recomendacion...</option>' +
+                recomendaciones.map(r => `<option value="${r}">${r.replace(/_/g, ' ')}</option>`).join('');
+
         } catch (e) {
             console.error("Error cargando los datos de administracion:", e);
         }
     },
 
+    // Metodo de enlace para relacionar Falla con Recomendacion (Endpoint 9)
+    async conectarRecomendacion() {
+        const falla = document.getElementById('select-falla-rec').value;
+        const recomendacion = document.getElementById('select-recomendacion').value;
+
+        if (!falla || !recomendacion) return alert("Selecciona ambos campos.");
+
+        try {
+            await fetch(`${URL}/recomendacion_falla`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ falla, recomendacion })
+            });
+            alert("Relación falla-recomendación guardada");
+        } catch (e) {
+            alert("Error al conectar la falla con la recomendación.");
+        }
+    },
     // Crear nuevo elemento (Endpoints 5, 6)
     async agregar(tipo) {
         const input = document.getElementById(`input-${tipo}`);
