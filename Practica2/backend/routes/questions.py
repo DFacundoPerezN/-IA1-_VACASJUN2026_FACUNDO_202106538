@@ -100,3 +100,55 @@ def get_questions_with_category():
         })
 
     return jsonify(questions)
+
+@questions_bp.route("/search", methods=["POST"])
+@questions_bp.route("/answer", methods=["POST"])
+def search_question():
+
+    data = request.json
+
+    question_text = data.get("question", "").strip()
+
+    question = db.questions.find_one({
+        "question": {
+            "$regex": f"^{question_text}$",
+            "$options": "i"
+        }
+    })
+
+    if not question:
+        return jsonify({
+            "found": False,
+            "answer": "Lo siento, no encontré una respuesta para tu consulta."
+        })
+
+    return jsonify({
+        "found": True,
+        "answer": question["answer"]
+    })
+
+@questions_bp.route("/category-name/<name>", methods=["GET"])
+def get_questions_by_category_name(name):
+
+    category = db.categories.find_one({
+        "name": name
+    })
+
+    if not category:
+        return jsonify({
+            "message": "Categoría no encontrada"
+        }), 404
+
+    questions = []
+
+    for question in db.questions.find({
+        "category_id": category["_id"]
+    }):
+
+        questions.append({
+            "id": str(question["_id"]),
+            "question": question["question"],
+            "answer": question["answer"]
+        })
+
+    return jsonify(questions)
