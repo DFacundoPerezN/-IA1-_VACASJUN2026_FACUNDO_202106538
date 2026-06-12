@@ -1,0 +1,102 @@
+[
+    {
+        "categoria":"manga",
+        "pregunta": "¿De qué dirección se lee el manga?",
+        "respuesta": "De derecha a izquierda"
+    },
+    {
+        "categoria":"manga",
+        "pregunta": "¿En qué revista se pública Dragon Ball?",
+        "respuesta": "En la Shonen Jump"
+    },
+    {
+        "categoria":"manga",
+        "pregunta": "¿Cuál es el género demografico que va dedicado a los chicos varones?",
+        "respuesta": "El Shonen"
+    },
+    {
+        "categoria":"manga",
+        "pregunta": "¿Cuál es el género demografico que va dedicado a jovenes y adultos?",
+        "respuesta": "El Seinen"
+    },
+    {
+        "categoria":"manga",
+        "pregunta": "¿Cuál es el género demografico que va dedicado a chicas adolescentes?",
+        "respuesta": "Es el Shojo"
+    },
+    {
+        "categoria":"manga",
+        "pregunta": "¿Cuál es el género demografico que va dedicado a las mujeres adultas?",
+        "respuesta": "Es el Josei"
+    },
+    {
+        "categoria":"manga",
+        "pregunta": "¿Cuál es el género demografico que va dedicado a niños pequeños?",
+        "respuesta": "Es el Kodomo"
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿Cuál es la mejor consola calidad/precio?",
+        "respuesta": "XBox Series S"
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿Cuál es el primer easter egg de los videojuegos?",
+        "respuesta": "En Adventure(1979) Warren Robinett agrego su nombre en sala secreta."
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿La primera consola con grafaicos 3D fue exitosa?",
+        "respuesta": "No, la Virtual Boy de nintendo fue mala en ventas."
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿Qué significa FPS?",
+        "respuesta": "Disparos en primera persona, first person shooter, como doom, half-life o Call of Duty."
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿Cuál es la mejor consola de Sony?",
+        "respuesta": "La PlayStation 2 es considerada la mejor consola, con la mayar coantidad de ventas y gran repertorio de juegos."
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿Dónde se desarrollo Tetris?",
+        "respuesta": "En Moscú, la unión Sovietica, actualmente Rusia."
+    },
+    {
+        "categoria":"videojuegos",
+        "pregunta": "¿Qué significa RPG?",
+        "respuesta": "Significa juego de rol, tiene multiples estilos como el ARPG, JRPG y el CRPG."
+    },
+    {
+        "categoria":"historia",
+        "pregunta": "¿Cual fue la última batalla que perdió Napoleon?",
+        "respuesta": "La batalla de Waterloo."
+    },
+    {
+        "categoria":"historia",
+        "pregunta": "¿Cuando empezó la Edad Media?",
+        "respuesta": "La caída del imperio romano de occidente dio paso a la Edad media."
+    },
+    {
+        "categoria":"historia",
+        "pregunta": "¿Qué fue la guerra de 100 años?",
+        "respuesta": "Una guerra entre Francia e Inglaterra por una serie de territorios heredados."
+    },
+    {
+        "categoria":"historia",
+        "pregunta": "¿Cuál fue el mayor descubrimiento?",
+        "respuesta": "El descubrimiento de América."
+    },
+    {
+        "categoria":"historia",
+        "pregunta": "¿Por qué Estados Unidos entró a la 2da guerra mundial?",
+        "respuesta": "Debido al ataque que recibió po r parte de Japón en Pear harbor y las alianzas mundiales."
+    },
+    {
+        "categoria":"historia",
+        "pregunta": "¿Quién fue el último Faraon?",
+        "respuesta": "Cleopatra fue la última faraona antes de que el imperio romano absorbiera a Egipto."
+    }
+]
