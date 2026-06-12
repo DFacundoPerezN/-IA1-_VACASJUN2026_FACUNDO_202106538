@@ -7,7 +7,7 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
         super().__init__(prolog_file)
 
     def get_recomendaciones(self) -> List[str]:
-        sol = self.query_one("get_recomendaciones(Lista)")
+        sol = self.query_one("get_recomendaciones(Lista).")
         if not sol:
             return []
         return [str(falla) for falla in sol['Lista']]
@@ -56,7 +56,7 @@ class Recommendatios_Repo(prolog_repo.PrologRepo):
         try:
             # Agregar nuevo recomendacion al prolog_file
             with self.prolog_file.open('a') as f:
-                f.write(f"recomendacion({recom_atom}).\n")
+                f.write(f"\nrecomendacion({recom_atom}).\n")
 
             self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ciudad
             return {

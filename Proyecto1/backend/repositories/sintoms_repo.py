@@ -14,7 +14,7 @@ class SintomsRepo(prolog_repo.PrologRepo):
         try:
             # Agregar nuevo sintoma al prolog_file
             with self.prolog_file.open('a') as f:
-                f.write(f"sintoma({sintoma_atom}).\n")
+                f.write(f"\nsintoma({sintoma_atom}).\n")
 
             self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ciudad
             return {

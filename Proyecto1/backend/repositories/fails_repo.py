@@ -6,10 +6,8 @@ class FailsRepo(prolog_repo.PrologRepo):
         super().__init__(prolog_file)
 
     def get_fallas(self) -> List[str]:
-        sol = self.query_one("get_fallas(Lista)")
-        if not sol:
-            return []
-        return [str(falla) for falla in sol['Lista']]
+        sols = self.query("falla(F).")
+        return [str(sol['F']) for sol in sols]
     
     def get_falla_por_sintomas(self, lista):
         sintomas="["
@@ -35,7 +33,7 @@ class FailsRepo(prolog_repo.PrologRepo):
         try:
             # Agregando falla al prolog_file
             with self.prolog_file.open('a') as f:
-                f.write(f"falla({falla_atom}).\n")
+                f.write(f"\nfalla({falla_atom}).\n")
 
             self._consult_file()  # Recargar el archivo para que Prolog reconozca la nueva ciudad
             return {

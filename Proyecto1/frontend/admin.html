@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Doctor Byte</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8">
+    <h1 class="text-3xl font-bold mb-8">Administración de Base de Conocimientos</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <section class="p-6 rounded-lg border shadow-lg">
+            <h2 class="text-xl font-semibold mb-4">Síntomas</h2>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="input-sintoma" placeholder="Nuevo síntoma" class="w-full px-2 py-1 border rounded">
+                <button onclick="admin.agregar('sintoma')" class="bg-indigo-600 px-3 py-1 rounded">Add</button>
+            </div>
+            <ul id="lista-sintomas-admin" class="space-y-2 max-h-60 overflow-y-auto pr-1"> </ul>
+   
+        </section>
+
+        <section class="p-6 rounded-lg border shadow-lg">
+            <h2 class="text-xl font-semibold mb-4">Fallas</h2>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="input-falla" placeholder="Nueva falla" class="w-full px-2 py-1 border rounded">
+                <button onclick="admin.agregar('falla')" class="bg-indigo-600 px-3 py-1 rounded">Add</button>
+            </div>
+            <ul id="lista-fallas-admin" class="space-y-2 max-h-60 overflow-y-auto pr-1"> </ul>
+        </section>
+
+        <section class="p-6 rounded-lg border shadow-lg">
+            <h2 class="text-xl font-semibold mb-4">Relaciones (Falla-Síntoma)</h2>
+            <select id="select-falla" class="w-full mb-2 p-1 border rounded"></select>
+            <select id="select-sintoma" class="w-full mb-2 p-1 border rounded"></select>
+            <button onclick="admin.conectar()" class="w-full bg-emerald-600 py-2 rounded">Conectar</button>
+        </section>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
