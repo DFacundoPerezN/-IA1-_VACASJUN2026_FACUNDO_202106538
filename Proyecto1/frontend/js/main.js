@@ -82,11 +82,14 @@ btnDiagnosticar.addEventListener('click', async () => {
     divResultado.innerText = "Analizando...";
     ulRecomendaciones.innerHTML = "";
 
+    // Capturamos el booleano del interruptor
+    const enviarNotificacion = document.getElementById('switch-notificar').checked;
+
     try {
         // 3. Llamadas concurrentes a la API
         const [resFalla, resRec] = await Promise.all([
-            diagnosticar(seleccionados),
-            getRecomendaciones(seleccionados)
+            diagnosticar(seleccionados, enviarNotificacion),
+            getRecomendaciones(seleccionados, enviarNotificacion)
         ]);
 
         // 4. Mostrar Resultados
