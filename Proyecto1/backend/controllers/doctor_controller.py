@@ -24,13 +24,16 @@ def doctor_router(service: DoctorService) -> APIRouter:
     def get_fallas(data: dict = Body(...)):
         print(f"Datos recibidos para obtener falla: {data}")
         listaSintomas = data.get("sintomas")
+        notificar = data.get("notificar")
         if not listaSintomas:
             return {
                 "success": False,
                 "message": "El campo 'sintomas' es requerido.",
                 "code": 400
             }
-        return service.get_falla_by_sintomas(listaSintomas)
+        if notificar is None:
+            notificar = True
+        return service.get_falla_by_sintomas(listaSintomas, notificar)
 
     @router.get("/recomendaciones", summary="Obtener recomendaciones por falla")
     def get_recomendaciones_by_falla(fail:str):
@@ -45,14 +48,16 @@ def doctor_router(service: DoctorService) -> APIRouter:
     @router.post("/recomendaciones", summary="Obtener recomendaciones por sintomas")
     def get_recomendaciones_by_sintomas(data: dict = Body(...)):
         listaSintomas = data.get("sintomas")
-        listaSintomas = data.get("sintomas")
+        notificar = data.get("notificar")
         if not listaSintomas:
             return {
                 "success": False,
                 "message": "El campo 'sintomas' es requerido.",
                 "code": 400
             }
-        return service.get_recomendaciones_by_sintomas(listaSintomas)
+        if notificar is None:
+            notificar = False
+        return service.get_recomendaciones_by_sintomas(listaSintomas, notificar)
 
     @router.post("/sintoma", summary="Agregar un nuevo síntoma")
     def add_sintoma(data: dict = Body(...)):
@@ -176,5 +181,16 @@ def doctor_router(service: DoctorService) -> APIRouter:
                 "code": 400
             }
         return service.update_recomendacion(viejo, nuevo)
+    
+    @router.put("/chat_id")
+    def update_chat_id(data: dict = Body(...)):
+        chat_id = data.get("chat_id")
+        if not chat_id:
+            return {
+                "success": False,
+                "message": "El campo chat_id es requerido.",
+                "code": 400
+            }
+        return service.update_chat_id(chat_id)
 
     return router

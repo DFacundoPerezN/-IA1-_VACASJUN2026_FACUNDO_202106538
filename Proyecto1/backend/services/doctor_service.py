@@ -3,7 +3,7 @@ from repositories.prolog_repo import PrologRepo
 from repositories.sintoms_repo import SintomsRepo
 from repositories.fails_repo import FailsRepo
 from repositories.recommendations_repo import Recommendatios_Repo
-from telegram.bot import enviar_falla, enviar_recomendaciones
+from telegram.bot import TelegramBot 
 
 class DoctorService:
     def __init__(self, prolog_repo: PrologRepo):
@@ -11,14 +11,16 @@ class DoctorService:
         self.sintoms_repository = SintomsRepo(prolog_repo.prolog_file)
         self.fails_repository = FailsRepo(self.prolog_repo.prolog_file)
         self.recom_repository = Recommendatios_Repo(self.prolog_repo.prolog_file)
+        self.bot = TelegramBot()
 
     def get_sintomas(self) -> List[str]:
         return self.sintoms_repository.get_sintomas()
     
-    def get_falla_by_sintomas(self, listaSintomas: List) -> dict:
+    def get_falla_by_sintomas(self, listaSintomas: List, notificar= True) -> dict:
         response = self.fails_repository.get_falla_por_sintomas(listaSintomas)
-        if (response["falla"] is not None ) and (response["falla"] != []):
-            enviar_falla(listaSintomas, response["falla"])
+        if (notificar):
+            if (response["falla"] is not None ) and (response["falla"] != []):
+                self.bot.enviar_falla(listaSintomas, response["falla"])
         return response
     
     def get_all_fallas(self) -> List[str]:
@@ -27,10 +29,11 @@ class DoctorService:
     def get_recomendaciones_by_falla(self, falla: str) :
         return self.recom_repository.get_recomendaciones_por_falla(falla.lower())
     
-    def get_recomendaciones_by_sintomas(self, listaSintomas: List) :
-        response = self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)
-        if (response["recommendations"] is not None ) and (response["recommendations"] != []):
-            enviar_recomendaciones(listaSintomas, response["recommendations"])
+    def get_recomendaciones_by_sintomas(self, listaSintomas: List, notificar = True) :
+        response = self.recom_repository.get_recomendaciones_por_sintomas(listaSintomas)        
+        if (notificar):
+            if (response["recommendations"] is not None ) and (response["recommendations"] != []):
+                self.bot.enviar_recomendaciones(listaSintomas, response["recommendations"])
         return response
     
     def get_all_recomendaciones(self) -> List[str]:
@@ -84,3 +87,7 @@ class DoctorService:
         old = old.replace(" ","_").lower()
         new = new.replace(" ","_").lower()
         return self.recom_repository.update_recommendation(old, new)
+    
+    def update_chat_id(self, chat_id: str) :
+        self.bot.cambiar_chat(chat_id)
+        return{"message":"se cambio correcatemente el id del chat"}
