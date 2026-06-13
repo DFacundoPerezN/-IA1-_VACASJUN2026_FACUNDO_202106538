@@ -352,3 +352,23 @@ response:
   "nombre_nuevo": "instalar_nuevo_modulo_wifi"
 }
 ```
+
+## 18. PUT Editar Id del chat
+
+/doctor/chat_id
+
+request:
+
+```json
+{
+  "chat_id":"-5040561022"
+}
+```
+
+response:
+
+```json
+{
+  "message": "se cambio correcatemente el id del chat"
+}
+```
