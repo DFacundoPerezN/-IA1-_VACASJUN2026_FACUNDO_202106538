@@ -108,10 +108,10 @@ def search_question():
     data = request.json
 
     question_text = data.get("question", "").strip()
-
+    print("pregunta "+repr(question_text))
     question = db.questions.find_one({
         "question": {
-            "$regex": f"^{question_text}$",
+            "$regex": f"{question_text}",
             "$options": "i"
         }
     })
