@@ -102,4 +102,3 @@ sintoma(bluetooth_caido).
 falla_causada_por(falta_modulo_bluetooth, [bluetooth_caido]).
 recomendacion(instalar_un_modulo_bluetooth).
 tratamiento(falta_modulo_bluetooth, [instalar_un_modulo_bluetooth]).
-recomendacion(instalar_modulo_wifi).

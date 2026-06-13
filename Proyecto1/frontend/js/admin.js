@@ -150,6 +150,28 @@ export const admin = {
             body: JSON.stringify({ falla, sintoma })
         });
         alert("Relacion guardada exitosamente");
+    },
+
+    async actualizarChatId() {
+        const inputChat = document.getElementById('input-chat-id');
+        const chatIdValor = inputChat.value.trim();
+
+        if (!chatIdValor) return alert("Por favor, ingresa un ID de chat válido.");
+
+        try {
+            const respuesta = await fetch(`${URL}/chat_id`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ chat_id: chatIdValor })
+            }).then(r => r.json());
+
+            alert(respuesta.message || "Se cambió correctamente el ID del chat");
+            inputChat.value = ""; // Limpiar el campo tras guardar con éxito
+        } catch (e) {
+            console.error("Error al actualizar el ID del chat:", e);
+            alert("No se pudo conectar con el servidor para actualizar el ID del chat.");
+        }
+
     }
 };
 
