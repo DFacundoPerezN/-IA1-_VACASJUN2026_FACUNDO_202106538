@@ -19,7 +19,8 @@ def login():
         password == "IA1-password@_new"):
 
         return jsonify({
-            "message": "Login exitoso"
+            "message": "Login exitoso",
+            "token": "admin"
         }), 200
 
     return jsonify({
