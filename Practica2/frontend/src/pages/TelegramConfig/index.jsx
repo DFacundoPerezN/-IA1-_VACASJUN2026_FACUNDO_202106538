@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import api from "../../services/api";
+import Layout from "../../components/Layout";
 
 export default function TelegramConfig() {
 
@@ -40,6 +41,7 @@ export default function TelegramConfig() {
     }
 
     return (
+    <Layout>
 
         <div
             style={{
@@ -78,5 +80,6 @@ export default function TelegramConfig() {
             </button>
 
         </div>
+        </Layout>  
     );
 }

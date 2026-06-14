@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import api from "../../services/api";
+import Layout from "../../components/Layout";
 
 import "./styles.css";
 
@@ -111,6 +112,8 @@ export default function Categories() {
     }
 
     return (
+
+    <Layout>
         <div className="categories-container">
 
             <h1>
@@ -216,5 +219,6 @@ export default function Categories() {
             </table>
 
         </div>
+    </Layout>
     );
 }

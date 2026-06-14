@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import Layout from "../../components/Layout";
 
 import "./styles.css";
 
@@ -117,7 +118,7 @@ export default function Questions() {
     }
 
     return (
-
+    <Layout>
         <div className="questions-container">
 
             <h1>
@@ -290,5 +291,6 @@ export default function Questions() {
 
         </div>
 
+    </Layout>
     );
 }
