@@ -1,10 +1,8 @@
 services:
 
-  mongodb:
+  mongo:
     image: mongo:8
-    container_name: smartbot-mongodb
-
-    restart: always
+    container_name: smartbot-mongo
 
     ports:
       - "27017:27017"
@@ -16,5 +14,38 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  backend:
+    build:
+      context: ./backend
+
+    container_name: smartbot-backend
+
+    ports:
+      - "5000:5000"
+
+    depends_on:
+      - mongo
+
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - TOKEN=${TOKEN}
+      - CHAT_ID=${CHAT_ID}
+      - API_URL=http://backend:5000
+
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: smartbot-frontend
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - backend
+
 volumes:
   mongo_data:
+
+# sudo docker compose up 
+# sudo docker exec -it smartbot-backend python seed.py

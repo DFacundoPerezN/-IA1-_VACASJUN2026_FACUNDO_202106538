@@ -7,6 +7,10 @@ from routes.auth import auth_bp
 from routes.categories import categories_bp
 from routes.questions import questions_bp
 from routes.telegram import telegram_bp
+from services.telegram_listener import (
+    start_listener
+)
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -18,4 +22,16 @@ app.register_blueprint(questions_bp)
 app.register_blueprint(telegram_bp)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    telegram_thread = Thread(
+        target=start_listener,
+        daemon=True
+    )
+
+    telegram_thread.start()
+
+    app.run(
+    host="0.0.0.0",
+    port=5000,
+    debug=False
+    )

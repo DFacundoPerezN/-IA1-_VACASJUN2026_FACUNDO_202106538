@@ -1,8 +1,9 @@
 import json
 from pymongo import MongoClient
+import os
 
 client = MongoClient(
-    "mongodb://faxx:faxx90@localhost:27017/"
+    os.getenv("MONGO_URI")
 )
 
 db = client["smartbot"]
