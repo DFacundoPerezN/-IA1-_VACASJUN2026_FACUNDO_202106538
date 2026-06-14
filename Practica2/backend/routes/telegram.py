@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 from services.telegram_service import TelegramBot
 
@@ -49,4 +49,24 @@ def process_messages():
 
     return jsonify({
         "message": "Procesado"
+    })
+
+@telegram_bp.route("/chat", methods=["PUT"])
+def update_chat():
+
+    data = request.json
+    chat_id = data["chat_id"]
+    print(f"nuevo id del chat:{chat_id}")
+    bot.change_chat(chat_id)
+
+    return jsonify({
+        "message": "Chat actualizado"
+    })
+
+@telegram_bp.route("/chat", methods=["GET"])
+def get_chat():
+
+
+    return jsonify({
+        "chat_id": bot.chat_id
     })

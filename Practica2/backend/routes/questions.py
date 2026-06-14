@@ -81,6 +81,26 @@ def delete_question(id):
         "message": "Pregunta eliminada"
     })
 
+@questions_bp.route("/<id>", methods=["GET"])
+def get_question(id):
+
+    result = db.questions.find_one({
+        "_id": ObjectId(id)
+    })
+
+    if not result:
+        return jsonify({
+            "found": False,
+            "answer": "Lo siento, no encontré la pregunta."
+        })
+    #print(type(result))
+    #print(result)
+    return jsonify({
+        "question": result["question"],
+        "answer": result["answer"],
+        "category_id": str(result["category_id"])
+    })
+
 @questions_bp.route("/with-category", methods=["GET"])
 def get_questions_with_category():
 

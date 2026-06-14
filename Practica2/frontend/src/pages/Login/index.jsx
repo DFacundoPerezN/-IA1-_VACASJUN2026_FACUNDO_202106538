@@ -32,7 +32,7 @@ export default function Login() {
                 response.data.token
             );
 
-            navigate("/categories");
+            navigate("/dashboard");
 
         } catch {
 

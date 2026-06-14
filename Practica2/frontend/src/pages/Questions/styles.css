@@ -1,0 +1,41 @@
+.questions-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 2rem;
+}
+
+.question-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1rem;
+
+    margin-bottom: 2rem;
+}
+
+.question-form input,
+.question-form textarea,
+.question-form select {
+
+    padding: .8rem;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+
+    border: 1px solid #ddd;
+
+    padding: .8rem;
+}
