@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
 
@@ -9,6 +10,8 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     async function handleSubmit(event) {
 
@@ -29,7 +32,7 @@ export default function Login() {
                 response.data.token
             );
 
-            alert(response.data.message);
+            navigate("/categories");
 
         } catch {
 

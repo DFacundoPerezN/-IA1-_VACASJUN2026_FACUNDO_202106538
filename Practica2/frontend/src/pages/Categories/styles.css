@@ -1,0 +1,44 @@
+.categories-container {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 2rem;
+}
+
+.category-form {
+
+    display: flex;
+
+    gap: 1rem;
+
+    margin-bottom: 2rem;
+}
+
+.category-form input {
+
+    flex: 1;
+
+    padding: .8rem;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+
+    border: 1px solid #ddd;
+
+    padding: .8rem;
+}
+
+button {
+
+    margin-right: .5rem;
+}
