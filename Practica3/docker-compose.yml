@@ -7,7 +7,7 @@ services:
 
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
+      POSTGRES_PASSWORD: faxx123
       POSTGRES_DB: invoices_db
 
     ports:
@@ -15,6 +15,23 @@ services:
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  backend:
+
+    build:
+      context: ./backend
+
+    container_name: invoice-backend
+
+    ports:
+      - "5000:5000"
+
+    depends_on:
+      - postgres
+
+    # environment:
+    #   DATABASE_URL: postgresql://admin:admin123@postgres:5432/invoices_db
+    #   JWT_SECRET: super_secret_key
 
 volumes:
   postgres_data:
