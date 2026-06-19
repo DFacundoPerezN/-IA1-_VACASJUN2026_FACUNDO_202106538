@@ -48,10 +48,7 @@ def get_supplier(id):
         "phone": supplier.phone
     })
 
-@suppliers_bp.route(
-    "",
-    methods=["GET"]
-)
+@suppliers_bp.route( "", methods=["GET"])
 def get_suppliers():
 
     suppliers = Supplier.query.all()
@@ -69,6 +66,25 @@ def get_suppliers():
         })
 
     return jsonify(result)
+
+@suppliers_bp.route("/<int:id>", methods=["PUT"])
+def update_supplier(id):
+
+    supplier = Supplier.query.get_or_404( id)
+
+    data = request.json
+
+    supplier.name = data["name"]
+    supplier.nit = data["nit"]
+    supplier.email = data.get("email")
+    supplier.phone = data.get("phone")
+
+    db.session.commit()
+
+    return jsonify({
+        "message":
+        "Proveedor actualizado"
+    })
 
 @suppliers_bp.route( "/<int:id>", methods=["DELETE"])
 def delete_supplier(id):
