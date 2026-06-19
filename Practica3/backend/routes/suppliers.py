@@ -48,18 +48,27 @@ def get_supplier(id):
         "phone": supplier.phone
     })
 
-@suppliers_bp.route( "/<int:id>", methods=["GET"])
-def get_supplier(id):
+@suppliers_bp.route(
+    "",
+    methods=["GET"]
+)
+def get_suppliers():
 
-    supplier = Supplier.query.get_or_404( id)
+    suppliers = Supplier.query.all()
 
-    return jsonify({
-        "id": supplier.id,
-        "name": supplier.name,
-        "nit": supplier.nit,
-        "email": supplier.email,
-        "phone": supplier.phone
-    })
+    result = []
+
+    for supplier in suppliers:
+
+        result.append({
+            "id": supplier.id,
+            "name": supplier.name,
+            "nit": supplier.nit,
+            "email": supplier.email,
+            "phone": supplier.phone
+        })
+
+    return jsonify(result)
 
 @suppliers_bp.route( "/<int:id>", methods=["DELETE"])
 def delete_supplier(id):
