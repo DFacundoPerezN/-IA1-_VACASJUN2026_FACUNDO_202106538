@@ -1,5 +1,4 @@
 from database.db import db
-
 class Invoice(db.Model):
 
     __tablename__ = "invoices"
@@ -7,6 +6,10 @@ class Invoice(db.Model):
     id = db.Column(
         db.Integer,
         primary_key=True
+    )
+
+    original_filename = db.Column(
+        db.String(255)
     )
 
     invoice_number = db.Column(
@@ -40,16 +43,6 @@ class Invoice(db.Model):
         db.Numeric(10, 2)
     )
 
-    file_path = db.Column(
-        db.String(500)
-    )
-
     status = db.Column(
-        db.String(50),
-        default="PENDING"
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        server_default=db.func.now()
+        db.String(50)
     )

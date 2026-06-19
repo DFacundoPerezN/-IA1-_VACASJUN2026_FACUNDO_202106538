@@ -120,3 +120,42 @@ response:
   "message": "Proveedor eliminado"
 }
 ```
+
+## 7. GET ver facturas
+
+/invoices
+
+response:
+
+```json
+[
+  
+  //...
+]
+```
+
+## POST processar factura
+
+/invoices/process
+
+request: 
+
+form data: file: "ruta"
+
+response:
+
+{
+    "data": {
+        "date": "24/10/2025",
+        "invoice_number": "FAC-00007",
+        "nit": "3542019-1",
+        "subtotal": "5019.46",
+        "supplier": "Manufacturas Amor S.Com.",
+        "tax": "12",
+        "total": "5621.80"
+    },
+    "errors": [
+        "La suma subtotal + impuesto no coincide con el total"
+    ],
+    "status": "ERROR"
+}

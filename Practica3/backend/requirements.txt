@@ -5,3 +5,7 @@ psycopg2-binary
 python-dotenv
 PyJWT
 Werkzeug
+opencv-python-headless
+pytesseract
+pdf2image
+Pillow
