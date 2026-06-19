@@ -4,7 +4,11 @@ from dotenv import load_dotenv
 
 from flask import Flask
 
+#Modelos qeu usamos para la base de datos en postgreSQL
 from models.user import User
+from models.supplier import Supplier
+from models.invoice import Invoice
+from models.processing_log import ProcessingLog
 
 from database.db import (
     configure_database,
