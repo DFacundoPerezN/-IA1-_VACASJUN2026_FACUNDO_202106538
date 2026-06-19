@@ -130,6 +130,12 @@ response:
 ```json
 [
   
+  {
+    "original_filename": "factura_007.png",
+    "id": 1,
+    "invoice_number": "FAC-00007",
+    "status": "PROCESSED"
+  },
   //...
 ]
 ```
@@ -144,6 +150,7 @@ form data: file: "ruta"
 
 response:
 
+```json
 {
     "data": {
         "date": "24/10/2025",
@@ -151,11 +158,12 @@ response:
         "nit": "3542019-1",
         "subtotal": "5019.46",
         "supplier": "Manufacturas Amor S.Com.",
-        "tax": "12",
+        "tax": "602.34",
         "total": "5621.80"
     },
-    "errors": [
-        "La suma subtotal + impuesto no coincide con el total"
-    ],
-    "status": "ERROR"
+    "invoice_id": 1,
+    "status": "SUCCESS"
 }
+
+
+```

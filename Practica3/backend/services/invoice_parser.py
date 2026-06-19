@@ -51,12 +51,15 @@ def extract_subtotal(text):
 def extract_tax(text):
 
     match = re.search(
-        r'IVA.*?Q?\s*([\d\.]+)',
+        r'IVA\s*[\d]+%?:\s*Q.?\s*([\d\.]+)',
         text,
         re.IGNORECASE
     )
+    #print(match)
+    if match:
+        return match[1]
 
-    return match.group(1) if match else None
+    return None
 
 def extract_total(text):
 

@@ -93,8 +93,8 @@ def get_invoices():
                 invoice.invoice_number,
             "status":
                 invoice.status,
-            "file_path":
-                invoice.file_path
+            "original_filename":
+                invoice.original_filename
         })
 
     return jsonify(result)
@@ -136,8 +136,8 @@ def process_invoice():
         else:
 
             text = extract_text_from_image(temp_path)
-        print("OCR RESULT:")
-        print(text)
+        print("OCR RESULT:", flush=True)
+        print(text, flush=True)
 
         data =  extract_invoice_data(text)
         
