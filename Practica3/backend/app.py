@@ -15,7 +15,9 @@ from database.db import (
     db
 )
 
+# Rutas de los endpoints
 from routes.auth import auth_bp
+from routes.suppliers import suppliers_bp
 
 load_dotenv()
 
@@ -43,9 +45,9 @@ def health():
         "Todo OK"
     }
 
-app.register_blueprint(
-    auth_bp
-)
+# Agregar blueprints o hulleas de los endpoints
+app.register_blueprint( auth_bp)
+app.register_blueprint( suppliers_bp)
 
 if __name__ == "__main__":
 
