@@ -3,8 +3,9 @@ import os
 from dotenv import load_dotenv
 
 from flask import Flask
+from flask_cors import CORS
 
-#Modelos qeu usamos para la base de datos en postgreSQL
+#Modelos que usamos para la base de datos en postgreSQL
 from models.user import User
 from models.supplier import Supplier
 from models.invoice import Invoice
@@ -25,6 +26,8 @@ from routes.reports import reports_bp
 load_dotenv()
 
 app = Flask(__name__)
+
+CORS(app)
 
 configure_database(app)
 
