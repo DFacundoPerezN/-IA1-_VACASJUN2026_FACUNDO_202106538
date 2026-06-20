@@ -3,7 +3,7 @@ function Reports() {
     const downloadCsv = () => {
 
         window.open(
-            "http://localhost:5000/reports/invoices/csv",
+            import.meta.env.VITE_API_URL+"/reports/invoices/csv",
             "_blank"
         );
     };

@@ -33,5 +33,17 @@ services:
     #   DATABASE_URL: postgresql://admin:admin123@postgres:5432/invoices_db
     #   JWT_SECRET: super_secret_key
 
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: invoice-frontend
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
