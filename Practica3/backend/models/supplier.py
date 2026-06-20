@@ -32,3 +32,22 @@ class Supplier(db.Model):
         db.DateTime,
         server_default=db.func.now()
     )
+
+
+def get_supplier_id(supplier_name: str, nit = "C/F"):
+    supplier = Supplier.query.filter(Supplier.name.ilike(supplier_name)).first()
+
+    if supplier:
+        supplier_id = supplier.id
+    else:
+        supplier = Supplier(
+            name=supplier_name,
+            nit=nit 
+        )
+
+        db.session.add(supplier)
+        db.session.flush()
+
+        supplier_id = supplier.id
+
+    return supplier_id

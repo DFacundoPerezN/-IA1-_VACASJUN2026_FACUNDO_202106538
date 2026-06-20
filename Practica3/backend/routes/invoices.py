@@ -1,5 +1,6 @@
 import os
 import uuid
+import jwt
 
 from flask import Blueprint
 from flask import request
@@ -7,6 +8,8 @@ from flask import jsonify
 
 from models.invoice import Invoice
 from database.db import db
+from models.processing_log import ProcessingLog
+import models.supplier
 
 import tempfile
 import os
@@ -137,7 +140,7 @@ def process_invoice():
 
             text = extract_text_from_image(temp_path)
         print("OCR RESULT:", flush=True)
-        print(text, flush=True)
+        #print(text, flush=True)
 
         data =  extract_invoice_data(text)
         
@@ -150,26 +153,31 @@ def process_invoice():
                 "errors":  errors,
                 "data":data
             }, 400
+        
+        supplier_id = models.supplier.get_supplier_id(data["supplier"],data["nit"])
        
         invoice = Invoice(
-
             original_filename= file.filename,
-
             invoice_number= data["invoice_number"],
-
             nit= data["nit"],
-
             subtotal= data["subtotal"],
-
             tax= data["tax"],
-
             total= data["total"],
-
-            status="PROCESSED"
+            status="PROCESSED",
+            supplier_id=supplier_id,
+            #date = data["date"]
         )
 
         db.session.add(invoice)
+        db.session.commit()
 
+        log = ProcessingLog(
+            user_id=get_current_user_id(),
+            invoice_id=invoice.id,
+            status="SUCCESS",
+            result="Factura procesada correctamente"
+        )
+        db.session.add(log)
         db.session.commit()
 
         return {
@@ -179,7 +187,17 @@ def process_invoice():
             }
     
 
-    except Exception as e:          
+    except Exception as e:
+
+        log = ProcessingLog(
+            user_id=get_current_user_id(),
+            status="ERROR",
+            result=str(e)
+        )
+
+        db.session.add(log)
+        db.session.commit()
+
         return {
             "status":"ERROR",
             "message":  "Algo ocurrio mientras se haceia ocr",
@@ -190,3 +208,35 @@ def process_invoice():
 
         if os.path.exists(temp_path):
             os.remove(temp_path)
+
+def get_current_user_id():
+
+    auth_header = request.headers.get("Authorization")
+    token = auth_header.split(" ")[1]
+    payload = jwt.decode(
+        token,
+        os.getenv( "JWT_SECRET"),
+        algorithms=["HS256"]
+    )
+
+    user_id = payload["user_id"]
+    return user_id
+
+# factura especifica
+@invoices_bp.route("/<int:id>", methods=["GET"])
+def get_invoice(id):
+
+    invoice = Invoice.query.get(id)
+
+    if not invoice:
+        return {"message": "Factura no encontrada"}, 404
+
+    return {
+        "id": invoice.id,
+        "invoice_number": invoice.invoice_number,
+        "nit": invoice.nit,
+        "subtotal": float(invoice.subtotal),
+        "tax": float(invoice.tax),
+        "total": float(invoice.total),
+        "status": invoice.status
+    }

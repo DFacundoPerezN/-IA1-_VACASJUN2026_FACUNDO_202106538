@@ -19,6 +19,7 @@ from database.db import (
 from routes.auth import auth_bp
 from routes.suppliers import suppliers_bp
 from routes.invoices import invoices_bp
+from routes.processing_log import logs_bp
 
 load_dotenv()
 
@@ -50,6 +51,7 @@ def health():
 app.register_blueprint( auth_bp)
 app.register_blueprint( suppliers_bp)
 app.register_blueprint( invoices_bp)
+app.register_blueprint( logs_bp)
 
 if __name__ == "__main__":
 

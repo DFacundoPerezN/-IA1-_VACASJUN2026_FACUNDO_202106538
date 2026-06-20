@@ -83,10 +83,9 @@ response:
     "nit": "251795376",
     "phone" : "+502 88899977"
 }
-
 ```
 
-## 5. PUT Editarroveedor
+## 5. PUT Editar proveedor
 
 /suppliers
 
@@ -140,7 +139,7 @@ response:
 ]
 ```
 
-## POST processar factura
+## 8. POST processar factura
 
 /invoices/process
 
@@ -164,6 +163,50 @@ response:
     "invoice_id": 1,
     "status": "SUCCESS"
 }
+```
 
+## 7. GET ver bitacora
 
+/logs
+
+response:
+
+```json
+[
+  {
+    "id": 2,
+    "invoice_id": 3,
+    "processed_at": "Fri, 19 Jun 2026 23:22:50 GMT",
+    "result": "Factura procesada correctamente",
+    "status": "SUCCESS",
+    "user_id": 1
+  },
+  {
+    "id": 1,
+    "invoice_id": 2,
+    "processed_at": "Fri, 19 Jun 2026 22:50:44 GMT",
+    "result": "Factura procesada correctamente",
+    "status": "SUCCESS",
+    "user_id": 1
+  },
+  //...
+]
+```
+
+## 9. GET un factura por
+
+/suppliers/<id>
+
+response:
+
+```json
+{
+  "id": 1,
+  "invoice_number": "FAC-00007",
+  "nit": "3542019-1",
+  "status": "PROCESSED",
+  "subtotal": 5019.46,
+  "tax": 602.34,
+  "total": 5621.8
+}
 ```

@@ -23,13 +23,9 @@ def login():
 
     data = request.json
 
-    username = data.get(
-        "username"
-    )
+    username = data.get( "username")
 
-    password = data.get(
-        "password"
-    )
+    password = data.get("password")
 
     user = User.query.filter_by(
         username=username
@@ -63,9 +59,7 @@ def login():
                 hours=12
             )
         },
-        os.getenv(
-            "JWT_SECRET"
-        ),
+        os.getenv( "JWT_SECRET"),
         algorithm="HS256"
     )
 

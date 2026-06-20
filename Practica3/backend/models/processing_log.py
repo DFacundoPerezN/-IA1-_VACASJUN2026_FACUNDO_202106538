@@ -12,20 +12,16 @@ class ProcessingLog(db.Model):
 
     invoice_id = db.Column(
         db.Integer,
-        db.ForeignKey(
-            "invoices.id"
-        )
+        db.ForeignKey("invoices.id")
     )
 
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey(
-            "users.id"
-        )
+        db.ForeignKey("users.id" )
     )
 
     status = db.Column(
-        db.String(50)
+        db.String(32)
     )
 
     result = db.Column(
