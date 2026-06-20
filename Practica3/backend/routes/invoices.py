@@ -92,12 +92,11 @@ def get_invoices():
 
         result.append({
             "id": invoice.id,
-            "invoice_number":
-                invoice.invoice_number,
-            "status":
-                invoice.status,
-            "original_filename":
-                invoice.original_filename
+            "invoice_number": invoice.invoice_number,
+            "status": invoice.status,
+            "original_filename": invoice.original_filename,
+            "nit": invoice.nit,
+            "total": invoice.total
         })
 
     return jsonify(result)
