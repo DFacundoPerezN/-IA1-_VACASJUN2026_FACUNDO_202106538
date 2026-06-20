@@ -27,11 +27,13 @@ function Logs() {
 
             <h1>Bitácora</h1>
 
-            <table>
+            <table className="table">
 
                 <thead>
                     <tr>
-                        <th>Fecha</th>
+                        <th>ID Usuario Responsable</th>
+                        <th>ID Factura</th>
+                        <th>Fecha y Hora</th>
                         <th>Estado</th>
                         <th>Resultado</th>
                     </tr>
@@ -42,6 +44,14 @@ function Logs() {
                     {logs.map(log => (
 
                         <tr key={log.id}>
+
+                            <td>
+                                {log.user_id}
+                            </td>
+
+                            <td>
+                                {log.invoice_id}
+                            </td>
 
                             <td>
                                 {log.processed_at}

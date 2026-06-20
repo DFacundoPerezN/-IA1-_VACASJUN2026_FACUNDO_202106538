@@ -25,6 +25,11 @@ class Invoice(db.Model):
         db.ForeignKey( "suppliers.id")
     )
 
+    supplier = db.relationship(
+        "Supplier",
+        backref="invoices"
+    )
+
     nit = db.Column(
         db.String(50)
     )

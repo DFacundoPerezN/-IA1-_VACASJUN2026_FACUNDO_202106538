@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPA Demo</title>
+</head>
+<body>
+
+    <h1>Registro de Factura</h1>
+
+    <input id="invoice_number" placeholder="Factura">
+
+    <input id="supplier" placeholder="Proveedor">
+
+    <input id="nit" placeholder="NIT">
+
+    <input id="subtotal" placeholder="Subtotal">
+
+    <input id="tax" placeholder="IVA">
+
+    <input id="total" placeholder="Total">
+
+    <button id="save_btn">
+        Guardar
+    </button>
+
+</body>
+</html>
+
+<script>
+
+document
+.getElementById("save_btn")
+.addEventListener(
+    "click",
+    async () => {
+
+
+        const data = {
+            invoice_number:
+                document.getElementById("invoice_number").value,
+
+            supplier:
+                document.getElementById("supplier").value,
+
+            nit:
+                document.getElementById("nit").value,
+
+            subtotal:
+                document.getElementById("subtotal").value,
+
+            tax:
+                document.getElementById("tax").value,
+
+            total:
+                document.getElementById("total").value
+        };
+
+        console.log("se esta enviando: ",data);
+
+        await fetch(
+            "/rpa/save",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+
+        document.body.innerHTML +=
+            "<h2 id='success'>Factura registrada</h2>";
+    }
+);
+
+</script>

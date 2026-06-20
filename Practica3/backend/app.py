@@ -22,6 +22,7 @@ from routes.suppliers import suppliers_bp
 from routes.invoices import invoices_bp
 from routes.processing_log import logs_bp
 from routes.reports import reports_bp
+from routes.rpa import rpa_bp
 
 load_dotenv()
 
@@ -57,6 +58,7 @@ app.register_blueprint( suppliers_bp)
 app.register_blueprint( invoices_bp)
 app.register_blueprint( logs_bp)
 app.register_blueprint( reports_bp)
+app.register_blueprint(rpa_bp)
 
 if __name__ == "__main__":
 

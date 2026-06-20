@@ -56,7 +56,7 @@ function Invoices() {
                 Procesar
             </button>
 
-            <table>
+            <table className="table">
 
                 <thead>
                     <tr>

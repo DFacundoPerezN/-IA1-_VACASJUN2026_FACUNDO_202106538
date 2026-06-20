@@ -12,6 +12,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN playwright install-deps chromium
+RUN playwright install chromium
+
 COPY . .
 
 EXPOSE 5000
