@@ -22,9 +22,7 @@ class Invoice(db.Model):
 
     supplier_id = db.Column(
         db.Integer,
-        db.ForeignKey(
-            "suppliers.id"
-        )
+        db.ForeignKey( "suppliers.id")
     )
 
     nit = db.Column(

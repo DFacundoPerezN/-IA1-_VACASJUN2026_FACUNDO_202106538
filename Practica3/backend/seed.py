@@ -20,7 +20,8 @@ with app.app_context():
             password=
             generate_password_hash(
                 "faxx123"
-            )
+            ),
+            email= "3607834730101@ingenieria.usac.edu.gt"
         )
 
         db.session.add(user)

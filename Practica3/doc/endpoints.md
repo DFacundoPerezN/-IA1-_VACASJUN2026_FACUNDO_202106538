@@ -210,3 +210,16 @@ response:
   "total": 5621.8
 }
 ```
+
+## 9. GET reporte csv
+
+/reports/invoices/csv
+
+response:
+
+```csv
+ID,Factura,ProveedorID,NIT,Fecha,Subtotal,IVA,Total,Estado
+1,FAC-00007,1,3542019-1,,5019.46,602.34,5621.80,PROCESSED
+2,FAC-00007,1,3542019-1,,5019.46,602.34,5621.80,PROCESSED
+3,FAC-00007,1,3542019-1,,5019.46,602.34,5621.80,PROCESSED
+```
