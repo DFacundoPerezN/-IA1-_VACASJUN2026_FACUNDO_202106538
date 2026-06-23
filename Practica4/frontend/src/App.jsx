@@ -15,6 +15,9 @@ export default function App() {
     updateCell,
     search,
     reset,
+    resize,
+    rows,
+    cols,
   } = useMaze();
 
   return (
@@ -34,6 +37,9 @@ export default function App() {
           onModeChange={setMode}
           onSearch={search}
           onReset={reset}
+          onResize={resize}
+          rows={rows}
+          cols={cols}
           loading={loading}
         />
 

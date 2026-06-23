@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import { runSearch } from "../api/mazeApi";
 
-const ROWS = 15;
-const COLS = 20;
+const DEFAULT_ROWS = 15;
+const DEFAULT_COLS = 20;
 
 export const CELL_TYPES = {
   EMPTY: "empty",
@@ -13,12 +13,14 @@ export const CELL_TYPES = {
   PATH: "path",
 };
 
-const buildEmptyGrid = () =>
-  Array.from({ length: ROWS }, () => Array(COLS).fill(CELL_TYPES.EMPTY));
+const buildEmptyGrid = (r, c) =>
+  Array.from({ length: r }, () => Array(c).fill(CELL_TYPES.EMPTY));
 
 export function useMaze() {
-  const [grid, setGrid] = useState(buildEmptyGrid);
-  const [mode, setMode] = useState("wall"); // "wall" | "start" | "goal" | "erase"
+  const [rows, setRowsState] = useState(DEFAULT_ROWS);
+  const [cols, setColsState] = useState(DEFAULT_COLS);
+  const [grid, setGrid] = useState(() => buildEmptyGrid(DEFAULT_ROWS, DEFAULT_COLS));
+  const [mode, setMode] = useState("wall");
   const [start, setStart] = useState(null);
   const [goal, setGoal] = useState(null);
   const [results, setResults] = useState(null);
@@ -150,13 +152,19 @@ export function useMaze() {
     [start, goal, grid, animateResult]
   );
 
-  const reset = useCallback(() => {
-    setGrid(buildEmptyGrid());
+  const reset = useCallback((r = rows, c = cols) => {
+    setGrid(buildEmptyGrid(r, c));
     setStart(null);
     setGoal(null);
     setResults(null);
     setError(null);
-  }, []);
+  }, [rows, cols]);
+
+  const resize = useCallback((newRows, newCols) => {
+    setRowsState(newRows);
+    setColsState(newCols);
+    reset(newRows, newCols);
+  }, [reset]);
 
   return {
     grid,
@@ -169,8 +177,9 @@ export function useMaze() {
     error,
     updateCell,
     search,
-    reset,
-    rows: ROWS,
-    cols: COLS,
+    reset: () => reset(rows, cols),
+    resize,
+    rows,
+    cols,
   };
 }

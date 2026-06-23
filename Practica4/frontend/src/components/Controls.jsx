@@ -7,9 +7,29 @@ const MODES = [
   { id: "erase",  label: "Borrar",   color: "#ef4444", icon: "✕" },
 ];
 
-export default function Controls({ mode, onModeChange, onSearch, onReset, loading }) {
+export default function Controls({ mode, onModeChange, onSearch, onReset, onResize, rows, cols, loading }) {
+  const handleResize = (e, type) => {
+    const val = Math.min(30, Math.max(4, Number(e.target.value)));
+    if (type === "rows") onResize(val, cols);
+    else onResize(rows, val);
+  };
+
   return (
     <div className="controls">
+      <section className="controls__section">
+        <h3 className="controls__label">Tamaño del laberinto</h3>
+        <div className="controls__size">
+          <label className="size-field">
+            <span>Filas</span>
+            <input type="number" min={4} max={30} value={rows} onChange={(e) => handleResize(e, "rows")} />
+          </label>
+          <label className="size-field">
+            <span>Columnas</span>
+            <input type="number" min={4} max={30} value={cols} onChange={(e) => handleResize(e, "cols")} />
+          </label>
+        </div>
+      </section>
+
       <section className="controls__section">
         <h3 className="controls__label">Modo de edición</h3>
         <div className="controls__modes">
