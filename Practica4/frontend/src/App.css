@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0a0f1e;
+  color: #e2e8f0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__header {
+  padding: 28px 40px 20px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.app__title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app__title-robot {
+  color: #3b82f6;
+  font-size: 28px;
+}
+
+.app__subtitle {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.app__main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 32px 40px;
+  flex-wrap: wrap;
+}
+
+.app__grid-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.app__hint {
+  font-size: 11px;
+  color: #475569;
+  text-align: center;
+}

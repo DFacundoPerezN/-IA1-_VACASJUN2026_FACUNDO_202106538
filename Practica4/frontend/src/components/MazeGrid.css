@@ -1,0 +1,48 @@
+.maze-grid {
+  display: inline-flex;
+  flex-direction: column;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  overflow: hidden;
+  user-select: none;
+  cursor: crosshair;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.maze-row {
+  display: flex;
+}
+
+.maze-cell {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s ease;
+  position: relative;
+}
+
+/* Estados de celda */
+.maze-cell--empty      { background-color: #0f172a; }
+.maze-cell--wall       { background-color: #334155; }
+.maze-cell--start      { background-color: #22c55e; }
+.maze-cell--goal       { background-color: #f59e0b; }
+.maze-cell--explored   { background-color: #1e3a5f; animation: fadeIn 0.15s ease; }
+.maze-cell--path       { background-color: #3b82f6; animation: fadeIn 0.1s ease; }
+
+.maze-cell--hovered.maze-cell--empty { background-color: #1e293b; }
+.maze-cell--hovered.maze-cell--wall  { background-color: #475569; }
+
+.maze-cell__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}

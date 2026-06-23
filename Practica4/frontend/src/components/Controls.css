@@ -1,0 +1,118 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 200px;
+}
+
+.controls__section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0;
+}
+
+.controls__modes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  background: #1e293b;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.mode-btn:hover {
+  border-color: var(--mode-color);
+  color: #e2e8f0;
+}
+
+.mode-btn--active {
+  border-color: var(--mode-color);
+  background: color-mix(in srgb, var(--mode-color) 15%, #1e293b);
+  color: #f1f5f9;
+}
+
+.mode-btn__icon {
+  font-size: 15px;
+  color: var(--mode-color);
+  width: 18px;
+  text-align: center;
+}
+
+.controls__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.run-btn {
+  padding: 11px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.run-btn:hover:not(:disabled) { opacity: 0.85; transform: translateY(-1px); }
+.run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.run-btn--bfs { background: #3b82f6; color: #fff; }
+.run-btn--dfs { background: #8b5cf6; color: #fff; }
+
+.reset-btn {
+  padding: 9px 14px;
+  background: transparent;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  color: #64748b;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.reset-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
