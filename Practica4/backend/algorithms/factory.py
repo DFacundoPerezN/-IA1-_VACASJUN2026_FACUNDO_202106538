@@ -6,9 +6,9 @@ de un identificador en texto (ej. "bfs", "dfs"). Esto desacopla
 a la capa de servicios/API de las clases concretas de cada algoritmo,
 y facilita agregar nuevos algoritmos en el futuro (Open/Closed Principle).
 """
-from base import SearchAlgorithm
-from bfs import BFSAlgorithm
-from dfs import DFSAlgorithm
+from algorithms.base import SearchAlgorithm
+from algorithms.bfs import BFSAlgorithm
+from algorithms.dfs import DFSAlgorithm
 
 
 class UnknownAlgorithmError(Exception):

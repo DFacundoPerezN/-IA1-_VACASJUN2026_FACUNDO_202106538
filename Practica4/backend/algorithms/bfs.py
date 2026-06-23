@@ -3,10 +3,10 @@
 import time
 from collections import deque
 
-from app.algorithms.base import SearchAlgorithm
-from app.domain.cell import Cell
-from app.domain.maze import Maze
-from app.domain.search_result import SearchResult
+from algorithms.base import SearchAlgorithm
+from models.cell import Cell
+from models.maze import Maze
+from models.search_result import SearchResult
 
 
 class BFSAlgorithm(SearchAlgorithm):

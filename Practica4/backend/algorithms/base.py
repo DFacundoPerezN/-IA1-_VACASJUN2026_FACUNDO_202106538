@@ -1,8 +1,8 @@
 #Interfaz común para los algoritmos de búsqueda (Patrón Strategy).
 
 from abc import ABC, abstractmethod
-from app.domain.maze import Maze
-from app.domain.search_result import SearchResult
+from models.maze import Maze
+from models.search_result import SearchResult
 
 
 class SearchAlgorithm(ABC):

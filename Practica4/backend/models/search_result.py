@@ -1,7 +1,7 @@
 #Modelo de Resultado de Búsqueda (SearchResult)
 
 from dataclasses import dataclass, field
-from cell import Cell
+from models.cell import Cell
 
 
 @dataclass
