@@ -11,16 +11,13 @@ from models.search_result import SearchResult
 
 
 class MazeSearchService:
-    def run_search(self,
-        algorithm_name: str, rows: int, cols: int, obstacles: list[tuple[int, int]],
-        start: tuple[int, int], goal: tuple[int, int]) -> SearchResult:
+    def run_search(self, algorithm_name: str, rows: int, cols: int, obstacles: list[tuple[int, int]], start: tuple[int, int], goal: tuple[int, int]) -> SearchResult:
 
         maze = Maze(rows=rows, cols=cols, obstacles=obstacles, start=start, goal=goal)
         algorithm = get_algorithm(algorithm_name)
         return algorithm.search(maze)
 
-    def run_comparison(self, rows: int, cols: int, obstacles: list[tuple[int, int]],
-        start: tuple[int, int], goal: tuple[int, int] ) -> dict[str, SearchResult]:
+    def run_comparison(self, rows: int, cols: int, obstacles: list[tuple[int, int]],start: tuple[int, int], goal: tuple[int, int] ) -> dict[str, SearchResult]:
 
         #Ejecuta BFS y DFS sobre el mismo laberinto para comparar resultados
         maze = Maze(rows=rows, cols=cols, obstacles=obstacles, start=start, goal=goal)

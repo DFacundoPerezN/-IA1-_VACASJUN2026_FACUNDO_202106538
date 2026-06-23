@@ -41,13 +41,13 @@ class DFSAlgorithm(SearchAlgorithm):
                     came_from[neighbor] = current
                     stack.append(neighbor)
 
-        models = self._reconstruct_models(came_from, start, goal) if found else []
+        path = self._reconstruct_models(came_from, start, goal) if found else []
         elapsed_ms = (time.perf_counter() - start_time) * 1000
 
         return SearchResult(
             algorithm=self.name,
             found=found,
-            models=models,
+            path=path,
             explored_order=explored_order,
             nodes_explored=len(explored_order),
             execution_time_ms=elapsed_ms,

@@ -20,16 +20,16 @@ def list_algorithms():
 
 
 @router.post("/search")
-def run_search(payload: SearchRequest):
+def run_search(data: SearchRequest):
     #Ejecuta un único algoritmo (BFS o DFS) sobre el laberinto enviado y devuelve la ruta encontrada, nodos explorados y tiempo de ejecución.
     try:
         result = service.run_search(
-            algorithm_name=payload.algorithm,
-            rows=payload.rows,
-            cols=payload.cols,
-            obstacles=_positions_to_tuples(payload.obstacles),
-            start=(payload.start.row, payload.start.col),
-            goal=(payload.goal.row, payload.goal.col),
+            algorithm_name=data.algorithm,
+            rows=data.rows,
+            cols=data.cols,
+            start=(data.start.row, data.start.col),
+            goal=(data.goal.row, data.goal.col),
+            obstacles=_positions_to_tuples(data.obstacles),
         )
     except InvalidMazeError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -40,16 +40,26 @@ def run_search(payload: SearchRequest):
 
 
 @router.post("/compare",summary="Compara algoritmos")
-def compare_algorithms(payload: CompareRequest):
+def compare_algorithms(data: CompareRequest):
     #Ejecuta BFS y DFS sobre el mismo laberinto y devuelve ambos resultados, útil para comparar desempeño en la interfaz web.
     try:
         results = service.run_comparison(
-            rows=payload.rows,
-            cols=payload.cols,
-            obstacles=_positions_to_tuples(payload.obstacles),
-            start=(payload.start.row, payload.start.col),
-            goal=(payload.goal.row, payload.goal.col),
+            rows=data.rows,
+            cols=data.cols,
+            obstacles=_positions_to_tuples(data.obstacles),
+            start=(data.start.row, data.start.col),
+            goal=(data.goal.row, data.goal.col),
         )
+        """
+        [f][ ][ ]
+        [+][ ][+]
+        [ ][ ][s]
+        rows= 3,
+        cols = 3,
+        start = {row = 2, col =2},
+        goal = {row = 0, col = 0},
+        obstacels = [{row = 1, col =0},{row = 1, col =2}]
+        """
     except InvalidMazeError as e:
         raise HTTPException(status_code=400, detail=str(e))
 

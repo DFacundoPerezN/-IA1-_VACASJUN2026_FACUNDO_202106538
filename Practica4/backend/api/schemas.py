@@ -1,10 +1,8 @@
 from pydantic import BaseModel, Field
 
-
 class Position(BaseModel):
     row: int
     col: int
-
 
 class SearchRequest(BaseModel):
     rows: int = Field(..., gt=0, description="Número de filas del laberinto")
