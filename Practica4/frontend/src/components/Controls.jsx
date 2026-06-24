@@ -64,6 +64,13 @@ export default function Controls({ mode, onModeChange, onSearch, onReset, onResi
           >
             {loading ? "Ejecutando..." : "▶ DFS"}
           </button>
+          <button
+            className="run-btn run-btn--astar"
+            onClick={() => onSearch("astar")}
+            disabled={loading}
+          >
+            {loading ? "Ejecutando..." : "▶ A*"}
+          </button>
         </div>
       </section>
 
