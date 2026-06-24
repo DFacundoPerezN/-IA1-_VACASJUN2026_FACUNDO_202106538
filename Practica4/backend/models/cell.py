@@ -23,3 +23,7 @@ class Cell:
 
     def __repr__(self) -> str:
         return f"({self.row}, {self.col})"
+    
+    def __lt__(self, other):
+        # Necesario para que heapq pueda comparar celdas cuando dos f son iguales
+        return (self.row, self.col) < (other.row, other.col)

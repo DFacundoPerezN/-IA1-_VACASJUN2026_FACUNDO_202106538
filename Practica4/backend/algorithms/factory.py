@@ -9,15 +9,15 @@ y facilita agregar nuevos algoritmos en el futuro (Open/Closed Principle).
 from algorithms.base import SearchAlgorithm
 from algorithms.bfs import BFSAlgorithm
 from algorithms.dfs import DFSAlgorithm
-
+from algorithms.astar import AStarAlgorithm 
 
 class UnknownAlgorithmError(Exception):
     pass
 
-
 _ALGORITHMS: dict[str, type[SearchAlgorithm]] = {
     "bfs": BFSAlgorithm,
     "dfs": DFSAlgorithm,
+    "astar": AStarAlgorithm
 }
 
 
