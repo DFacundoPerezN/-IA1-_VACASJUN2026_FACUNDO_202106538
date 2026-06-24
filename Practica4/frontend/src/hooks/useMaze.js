@@ -133,8 +133,8 @@ export function useMaze() {
 
       try {
         const { data } = await runSearch({
-          rows: ROWS,
-          cols: COLS,
+          rows: rows,
+          cols: cols,
           obstacles,
           start,
           goal,
@@ -144,6 +144,7 @@ export function useMaze() {
         setResults(data);
         animateResult(data.explored_order, data.path, grid);
       } catch (err) {
+        console.error("Error:", err)
         setError(err.response?.data?.detail || "Error al conectar con el servidor.");
       } finally {
         setLoading(false);
